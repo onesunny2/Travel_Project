@@ -10,13 +10,13 @@
         <!--SeSAC TRAVEL-->
         <scene sceneID="dIx-Pj-d8q">
             <objects>
-                <tableViewController id="rsJ-Ln-f8h" customClass="MagazineTableViewController" customModule="TravelProject" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="rsJ-Ln-f8h" customClass="MagazineTableViewController" customModule="Travel_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="hvt-Rg-41n">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MagazineTableViewCell" rowHeight="444" id="JcD-Ml-DPY" customClass="MagazineTableViewCell" customModule="TravelProject" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MagazineTableViewCell" rowHeight="444" id="JcD-Ml-DPY" customClass="MagazineTableViewCell" customModule="Travel_Project" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="393" height="444"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JcD-Ml-DPY" id="eE4-H8-AuI">
@@ -30,42 +30,40 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJr-C9-fQd">
-                                            <rect key="frame" x="40" y="345" width="313" height="20.333333333333314"/>
+                                            <rect key="frame" x="39.999999999999986" y="345" width="208.66666666666663" height="20.333333333333314"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="53a-eq-Fod">
-                                            <rect key="frame" x="40" y="373.33333333333331" width="313" height="21"/>
+                                            <rect key="frame" x="40" y="369.33333333333331" width="41.333333333333343" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RfV-r1-mEL">
-                                            <rect key="frame" x="311" y="402.33333333333331" width="42" height="21"/>
+                                            <rect key="frame" x="311" y="398.33333333333331" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="53a-eq-Fod" secondAttribute="trailing" constant="40" id="33r-Ys-wDb"/>
                                         <constraint firstItem="zYJ-gv-3aa" firstAttribute="top" secondItem="eE4-H8-AuI" secondAttribute="top" constant="16" id="9t4-Si-VTt"/>
-                                        <constraint firstItem="53a-eq-Fod" firstAttribute="top" secondItem="gJr-C9-fQd" secondAttribute="bottom" constant="8" id="HRP-7A-GZi"/>
+                                        <constraint firstItem="53a-eq-Fod" firstAttribute="top" secondItem="gJr-C9-fQd" secondAttribute="bottom" constant="4" id="HRP-7A-GZi"/>
                                         <constraint firstItem="RfV-r1-mEL" firstAttribute="top" secondItem="53a-eq-Fod" secondAttribute="bottom" constant="8" id="IKY-Zv-ez0"/>
                                         <constraint firstItem="zYJ-gv-3aa" firstAttribute="leading" secondItem="eE4-H8-AuI" secondAttribute="leading" constant="40" id="Mfy-4K-o6K"/>
                                         <constraint firstAttribute="trailing" secondItem="zYJ-gv-3aa" secondAttribute="trailing" constant="40" id="dIV-st-hSL"/>
                                         <constraint firstAttribute="trailing" secondItem="RfV-r1-mEL" secondAttribute="trailing" constant="40" id="dR6-ql-e0R"/>
                                         <constraint firstItem="gJr-C9-fQd" firstAttribute="leading" secondItem="eE4-H8-AuI" secondAttribute="leading" constant="40" id="h8Y-ZT-1EO"/>
                                         <constraint firstItem="gJr-C9-fQd" firstAttribute="top" secondItem="zYJ-gv-3aa" secondAttribute="bottom" constant="16" id="o0I-R2-q1h"/>
+                                        <constraint firstItem="gJr-C9-fQd" firstAttribute="width" secondItem="zYJ-gv-3aa" secondAttribute="height" multiplier="2:3" id="q78-Ln-GMn"/>
                                         <constraint firstItem="53a-eq-Fod" firstAttribute="leading" secondItem="eE4-H8-AuI" secondAttribute="leading" constant="40" id="qMF-Fr-D1T"/>
-                                        <constraint firstAttribute="trailing" secondItem="gJr-C9-fQd" secondAttribute="trailing" constant="40" id="sFZ-B3-e9d"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="magazineImageView" destination="zYJ-gv-3aa" id="VPY-Dh-dY3"/>
                                     <outlet property="mainTitleLabel" destination="gJr-C9-fQd" id="Yvx-wr-ocS"/>
-                                    <outlet property="megazineImageView" destination="zYJ-gv-3aa" id="LBd-TZ-yzd"/>
                                     <outlet property="subTitleLabel" destination="53a-eq-Fod" id="B7o-gK-Y9y"/>
                                     <outlet property="uploadDateLabel" destination="RfV-r1-mEL" id="JjD-aE-OJY"/>
                                 </connections>
