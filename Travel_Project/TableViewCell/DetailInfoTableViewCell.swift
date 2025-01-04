@@ -16,3 +16,4 @@ class  DetailInfoTableViewCell: UITableViewCell {
     @IBOutlet var likeButton: UIButton!
     
 }
+

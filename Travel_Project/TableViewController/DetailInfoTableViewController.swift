@@ -15,7 +15,13 @@ class DetailInfoTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableView.rowHeight = 160
+        
+        // 아래는 실패한 방법
+        /* if UITableViewCell.self == DetailInfoTableViewCell.self {
+            tableView.rowHeight = 160
+        } else if UITableViewCell.self == AdTableViewCell.self {
+            tableView.rowHeight = 80
+        } */
         
     }
     
@@ -41,36 +47,36 @@ class DetailInfoTableViewController: UITableViewController {
         
         let row = travelInfos.travel[indexPath.row]
         
-        // detailInfo 셀
-        guard let infoCell = tableView.dequeueReusableCell(withIdentifier: "DetailInfoTableViewCell", for: indexPath) as? DetailInfoTableViewCell, let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
-        
-        if row.ad == false {
+        if row.ad != true {
+            
+            guard let infoCell = tableView.dequeueReusableCell(withIdentifier: "DetailInfoTableViewCell", for: indexPath) as? DetailInfoTableViewCell else { return UITableViewCell() }
+            
             // extension 사용 버전1
             /* if let url = row.travel_image {
-             infoCell.cityImageView.useKf1(url: url)
-             } */
+                infoCell.cityImageView.useKf1(url: url)
+            } */
             
             // extension 사용 버전2
             infoCell.cityImageView.useKf2(url: row.travel_image)
             
             /* if row.like == true {
-             infoCell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-             infoCell.likeButton.setTitle("", for: .normal)
-             infoCell.likeButton.tintColor = .red
-             } else {
-             infoCell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-             infoCell.likeButton.setTitle("", for: .normal)
-             infoCell.likeButton.tintColor = .red
-             } */
-            
+                infoCell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+                infoCell.likeButton.setTitle("", for: .normal)
+                infoCell.likeButton.tintColor = .red
+            } else {
+                infoCell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+                infoCell.likeButton.setTitle("", for: .normal)
+                infoCell.likeButton.tintColor = .red
+            } */
+                    
             if let like = row.like {
                 infoCell.likeButton.setImage(UIImage(systemName: like ? "heart.fill" : "heart"), for: .normal)
                 infoCell.likeButton.setTitle("", for: .normal)
                 infoCell.likeButton.tintColor = .red
-                //            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+    //            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
             } else {
-                //            infoCell.likeButton.setImage(UIImage(), for: .normal)
-                //            infoCell.likeButton.setTitle("", for: .normal)
+    //            infoCell.likeButton.setImage(UIImage(), for: .normal)
+    //            infoCell.likeButton.setTitle("", for: .normal)
                 
                 infoCell.likeButton.isHidden = true
             }
@@ -90,8 +96,8 @@ class DetailInfoTableViewController: UITableViewController {
                 let grade = grade.rounded()
                 let intGrade = Int(grade)
                 for index in 0...intGrade - 1 {
-                    infoCell.gradeImageView[index].image = UIImage(named: "star")
-                    infoCell.gradeImageView[index].contentMode = .scaleAspectFit
+                        infoCell.gradeImageView[index].image = UIImage(named: "star")
+                        infoCell.gradeImageView[index].contentMode = .scaleAspectFit
                 }
                 
                 // 위에서 5개를 못채우면 남은 애들 히든 필요해!
@@ -110,16 +116,32 @@ class DetailInfoTableViewController: UITableViewController {
             } else {
                 infoCell.saveLabel.isHidden = true
             }
+            
+            return infoCell
         } else {
             
+            guard let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
+
+            adCell.backgroundColorImageView.backgroundColor = .orange
+            
+            return adCell
         }
         
-        return infoCell
+
     }
     
-//    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 160
-//    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        
+        var height: CGFloat = 0
+        
+        if travelInfos.travel[indexPath.row].ad {
+            height = 80
+        } else {
+            height = 160
+        }
+        
+        return height
+    }
 
 }
 
@@ -158,4 +180,17 @@ class DetailInfoTableViewController: UITableViewController {
     🔥2개의 셀 도전🔥
     (현재 생각 중인 방법)
         - travelInfo의 ad 값이 true인 indexPath에만 adCell로 바꿔치기 할 수 있다면...?
+        1차시도 ) returnCell을 (cell, cell) 2개 반환해보고자 했지만 불가능한 형태로 바로 드랍
+        2차시도 ) ad값에 따라서 쓰고자하는 Cell을 넣어보기
+            ㄴ 처음에 if 값에 따라서 디자인한 내용을 다 몰아넣었을 때는 제대로 그려지지 않았음
+            ㄴ 새로운 cell을 선언해서 그 cell에 infoCell, adCell을 넣어주니 성공!
+        
+        - 두번째 문제는 각 셀의 높이인데... viewDidLoad에서 if로 나눠서 해주니 설정이 이상함
+            ㄴ height 함수로 가보자아
+    
+    (겪었던 문제상황)
+        ✅✅✅ 현재 height를 그대로 사용했을 때 2번탭을 들어가면 앱이 터지는 현상 발견
+        - 알고보니 내가 재사용하는 셀을 미리 다 만들어 할당한 후에 ad가 true, false인지에 따라 2개의
+          셀을 나눠주면서, 이미 indexPath.row에 중복되도록 2개의 셀이 들어가면서 발생.
+        - 처음부터 if문으로 ad의 Bool 값에 따라 조건을 나눠주어 return 하여 해결
  */
