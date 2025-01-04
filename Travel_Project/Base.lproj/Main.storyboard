@@ -260,22 +260,101 @@
             </objects>
             <point key="canvasLocation" x="1295.4198473282443" y="757.74647887323943"/>
         </scene>
-        <!--Table View Controller-->
+        <!--Shopping Table View Controller-->
         <scene sceneID="ZE1-co-BJZ">
             <objects>
-                <tableViewController id="6Uv-ot-jPR" sceneMemberID="viewController">
+                <tableViewController id="6Uv-ot-jPR" customClass="ShoppingTableViewController" customModule="Travel_Project" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="3El-hT-znV">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="c7N-pf-gRU">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="84"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dsc-EL-tRp">
+                                    <rect key="frame" x="20" y="8" width="353" height="68"/>
+                                </imageView>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qRS-XZ-rFo">
+                                    <rect key="frame" x="282" y="25.000000000000004" width="75" height="34.333333333333343"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                </button>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBb-99-ox9">
+                                    <rect key="frame" x="36" y="25" width="236" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="qRS-XZ-rFo" firstAttribute="leading" secondItem="JBb-99-ox9" secondAttribute="trailing" constant="10" id="CEH-9q-gyv"/>
+                                <constraint firstItem="dsc-EL-tRp" firstAttribute="leading" secondItem="c7N-pf-gRU" secondAttribute="leading" constant="20" id="DWI-x5-2NZ"/>
+                                <constraint firstItem="JBb-99-ox9" firstAttribute="leading" secondItem="c7N-pf-gRU" secondAttribute="leading" constant="36" id="FXy-kJ-8bb"/>
+                                <constraint firstItem="dsc-EL-tRp" firstAttribute="top" secondItem="c7N-pf-gRU" secondAttribute="top" constant="8" id="JPa-VK-AYf"/>
+                                <constraint firstAttribute="trailing" secondItem="dsc-EL-tRp" secondAttribute="trailing" constant="20" id="b0U-EA-cfD"/>
+                                <constraint firstAttribute="bottom" secondItem="dsc-EL-tRp" secondAttribute="bottom" constant="8" id="ghm-NR-Qq2"/>
+                                <constraint firstAttribute="trailing" secondItem="qRS-XZ-rFo" secondAttribute="trailing" constant="36" id="mzh-kJ-Tqh"/>
+                                <constraint firstItem="JBb-99-ox9" firstAttribute="centerY" secondItem="dsc-EL-tRp" secondAttribute="centerY" id="oLn-oX-bbT"/>
+                                <constraint firstItem="qRS-XZ-rFo" firstAttribute="centerY" secondItem="dsc-EL-tRp" secondAttribute="centerY" id="xpP-Vl-20v"/>
+                            </constraints>
+                        </view>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="ldj-OA-gug">
-                                <rect key="frame" x="0.0" y="50" width="393" height="44.666667938232422"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="ldj-OA-gug" customClass="ShoppingTableViewCell" customModule="Travel_Project" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="134" width="393" height="55"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ldj-OA-gug" id="cI3-TT-m8E">
-                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4vK-06-Qrt">
+                                            <rect key="frame" x="20" y="0.0" width="353" height="55"/>
+                                        </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWe-LA-EwD">
+                                            <rect key="frame" x="40" y="15" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="25" id="JFp-4f-jnr"/>
+                                                <constraint firstAttribute="width" secondItem="hWe-LA-EwD" secondAttribute="height" multiplier="1:1" id="Zvp-VG-l7m"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T4g-b1-Hf5">
+                                            <rect key="frame" x="328" y="15" width="25" height="25"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" secondItem="T4g-b1-Hf5" secondAttribute="height" multiplier="1:1" id="OBY-IK-cwk"/>
+                                                <constraint firstAttribute="width" constant="25" id="uqr-7g-koL"/>
+                                            </constraints>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XFQ-aU-LF5">
+                                            <rect key="frame" x="85" y="17" width="223" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="4vK-06-Qrt" firstAttribute="top" secondItem="cI3-TT-m8E" secondAttribute="top" id="09o-Sw-Jlh"/>
+                                        <constraint firstItem="T4g-b1-Hf5" firstAttribute="leading" secondItem="XFQ-aU-LF5" secondAttribute="trailing" constant="20" id="9PK-jh-jG9"/>
+                                        <constraint firstAttribute="trailing" secondItem="4vK-06-Qrt" secondAttribute="trailing" constant="20" id="9Tq-Aw-8Tx"/>
+                                        <constraint firstItem="XFQ-aU-LF5" firstAttribute="centerY" secondItem="4vK-06-Qrt" secondAttribute="centerY" id="N9r-sl-62d"/>
+                                        <constraint firstItem="hWe-LA-EwD" firstAttribute="leading" secondItem="cI3-TT-m8E" secondAttribute="leading" constant="40" id="Z7K-wz-nXV"/>
+                                        <constraint firstItem="hWe-LA-EwD" firstAttribute="centerY" secondItem="4vK-06-Qrt" secondAttribute="centerY" id="chV-Au-n60"/>
+                                        <constraint firstItem="T4g-b1-Hf5" firstAttribute="centerY" secondItem="4vK-06-Qrt" secondAttribute="centerY" id="dIY-0O-hGq"/>
+                                        <constraint firstAttribute="bottom" secondItem="4vK-06-Qrt" secondAttribute="bottom" id="gdk-Pz-gNQ"/>
+                                        <constraint firstAttribute="trailing" secondItem="T4g-b1-Hf5" secondAttribute="trailing" constant="40" id="oPT-HM-FU4"/>
+                                        <constraint firstItem="4vK-06-Qrt" firstAttribute="leading" secondItem="cI3-TT-m8E" secondAttribute="leading" constant="20" id="s9C-dL-tm7"/>
+                                        <constraint firstItem="XFQ-aU-LF5" firstAttribute="leading" secondItem="hWe-LA-EwD" secondAttribute="trailing" constant="20" id="tOH-rr-XhV"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="backgroundImageView" destination="4vK-06-Qrt" id="X1S-SI-1C9"/>
+                                    <outlet property="checkboxButton" destination="hWe-LA-EwD" id="shI-O6-yz0"/>
+                                    <outlet property="favoriteButton" destination="T4g-b1-Hf5" id="Rmz-sI-3wu"/>
+                                    <outlet property="itemLabel" destination="XFQ-aU-LF5" id="39m-YK-nGy"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -284,6 +363,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="HSx-WG-V5k"/>
+                    <connections>
+                        <outlet property="addButton" destination="qRS-XZ-rFo" id="eOW-TU-mYa"/>
+                        <outlet property="shoppingTextfield" destination="JBb-99-ox9" id="uge-X1-B8U"/>
+                        <outlet property="textfieldBgImageView" destination="dsc-EL-tRp" id="RQD-NR-QiF"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0xP-9v-5RC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
