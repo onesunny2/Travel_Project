@@ -42,65 +42,76 @@ class DetailInfoTableViewController: UITableViewController {
         let row = travelInfos.travel[indexPath.row]
         
         // detailInfo 셀
-        guard let infoCell = tableView.dequeueReusableCell(withIdentifier: "DetailInfoTableViewCell", for: indexPath) as? DetailInfoTableViewCell else { return UITableViewCell() }
+        guard let infoCell = tableView.dequeueReusableCell(withIdentifier: "DetailInfoTableViewCell", for: indexPath) as? DetailInfoTableViewCell, let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
         
-        // extension 사용 버전1
-        /* if let url = row.travel_image {
-            infoCell.cityImageView.useKf1(url: url)
-        } */
-        
-        // extension 사용 버전2
-        infoCell.cityImageView.useKf2(url: row.travel_image)
-        
-        /* if row.like == true {
-            infoCell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-            infoCell.likeButton.setTitle("", for: .normal)
-            infoCell.likeButton.tintColor = .red
-        } else {
-            infoCell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-            infoCell.likeButton.setTitle("", for: .normal)
-            infoCell.likeButton.tintColor = .red
-        } */
-        
-        if let like = row.like {
-            infoCell.likeButton.setImage(UIImage(systemName: like ? "heart.fill" : "heart"), for: .normal)
-            infoCell.likeButton.setTitle("", for: .normal)
-            infoCell.likeButton.tintColor = .red
-//            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        } else {
-//            infoCell.likeButton.setImage(UIImage(), for: .normal)
-//            infoCell.likeButton.setTitle("", for: .normal)
+        if row.ad == false {
+            // extension 사용 버전1
+            /* if let url = row.travel_image {
+             infoCell.cityImageView.useKf1(url: url)
+             } */
             
-            infoCell.likeButton.isHidden = true
-        }
-        
-        infoCell.likeButton.tag = indexPath.row // 여기서 태그 값 설정해주기
-        infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-        
-        if let title = row.title, let description = row.description {
-            infoCell.titleLabel[0].commonUI(title, line: 1, textColor: .label, size: 15, weight: .bold)
-            infoCell.titleLabel[1].commonUI(description, line: 0, size: 13)
-        } else {
-            infoCell.titleLabel[0].text = ""
-            infoCell.titleLabel[1].text = ""
-        }
-        
-        if let grade = row.grade {
-            let grade = grade.rounded()
-            let intGrade = Int(grade)
-            for index in 0...intGrade - 1 {
+            // extension 사용 버전2
+            infoCell.cityImageView.useKf2(url: row.travel_image)
+            
+            /* if row.like == true {
+             infoCell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
+             infoCell.likeButton.setTitle("", for: .normal)
+             infoCell.likeButton.tintColor = .red
+             } else {
+             infoCell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
+             infoCell.likeButton.setTitle("", for: .normal)
+             infoCell.likeButton.tintColor = .red
+             } */
+            
+            if let like = row.like {
+                infoCell.likeButton.setImage(UIImage(systemName: like ? "heart.fill" : "heart"), for: .normal)
+                infoCell.likeButton.setTitle("", for: .normal)
+                infoCell.likeButton.tintColor = .red
+                //            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+            } else {
+                //            infoCell.likeButton.setImage(UIImage(), for: .normal)
+                //            infoCell.likeButton.setTitle("", for: .normal)
+                
+                infoCell.likeButton.isHidden = true
+            }
+            
+            infoCell.likeButton.tag = indexPath.row // 여기서 태그 값 설정해주기
+            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
+            
+            if let title = row.title, let description = row.description {
+                infoCell.titleLabel[0].commonUI(title, line: 1, textColor: .label, size: 15, weight: .bold)
+                infoCell.titleLabel[1].commonUI(description, line: 0, size: 13)
+            } else {
+                infoCell.titleLabel[0].text = ""
+                infoCell.titleLabel[1].text = ""
+            }
+            
+            if let grade = row.grade {
+                let grade = grade.rounded()
+                let intGrade = Int(grade)
+                for index in 0...intGrade - 1 {
                     infoCell.gradeImageView[index].image = UIImage(named: "star")
                     infoCell.gradeImageView[index].contentMode = .scaleAspectFit
-            }
-            
-            // 위에서 5개를 못채우면 남은 애들 히든 필요해!
-            if (5 - intGrade) != 0 && intGrade < 5 {
-                // 만약 intGrade = 4 -> index 4 히든
-                // 만약 intGrade = 3 -> index 3,4 히든
-                for index in intGrade...4 {
-                    infoCell.gradeImageView[index].isHidden = true
+                }
+                
+                // 위에서 5개를 못채우면 남은 애들 히든 필요해!
+                if (5 - intGrade) != 0 && intGrade < 5 {
+                    // 만약 intGrade = 4 -> index 4 히든
+                    // 만약 intGrade = 3 -> index 3,4 히든
+                    for index in intGrade...4 {
+                        infoCell.gradeImageView[index].isHidden = true
+                    }
                 }
             }
+            
+            if let save = row.save {
+                let formatted = save.formatted()
+                infoCell.saveLabel.commonUI("• 저장 \(formatted)", line: 1, textColor: .systemGray2, size: 12)
+            } else {
+                infoCell.saveLabel.isHidden = true
+            }
+        } else {
+            
         }
         
         return infoCell
@@ -140,4 +151,11 @@ class DetailInfoTableViewController: UITableViewController {
         ㄴ 데이터 속 grade가 소숫점인데 반올림으로 올려서 갯수를 채워볼 예정 -> 총 5개말고 우선은 별 갯수만 맞춰보는걸로
         ㄴ 별 5개가 들어갈 이미지뷰 5개로 저장 label과 함께 stackView로 묶음 => ❔첨에 왜 빈 공간 안줄어들어! 했는데 로직설정을 잘못했었다. 별 갯수를 채우고 남는 애들을 따로 히든 처리 해야한다 => for문 역순으로도 index 셀 수 있을 줄 알았는데 lower bound upper bound 이슈로 터짐!
  
+    - 저장 횟수 구현
+        ㄴ 이것도 extension 재사용 해보자! ✅✅ 재사용 연습을 해봐야 공통으로 잘 쓰일 extension을 나중에 더 잘 쓸 수 있을 것 같다
+        ㄴ 3자리는 formatted() 전에 배웠던 것 사용!
+ 
+    🔥2개의 셀 도전🔥
+    (현재 생각 중인 방법)
+        - travelInfo의 ad 값이 true인 indexPath에만 adCell로 바꿔치기 할 수 있다면...?
  */
