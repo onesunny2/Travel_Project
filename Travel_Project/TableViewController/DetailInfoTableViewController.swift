@@ -11,6 +11,7 @@ import Kingfisher
 class DetailInfoTableViewController: UITableViewController {
     
     var travelInfos = TravelInfo()
+    var adColor: [UIColor] = [.systemMint, .systemCyan, .orange, .yellow, .systemGray, .green]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -118,12 +119,24 @@ class DetailInfoTableViewController: UITableViewController {
             }
             
             return infoCell
-        } else {
+        } else {  // 이렇게 경우의 수가 나눠지면서 위쪽에 nil에 대해 대응했던 코드는 사실상 없어도 무방
             
             guard let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
-
-            adCell.backgroundColorImageView.backgroundColor = .orange
             
+            adCell.backgroundColorImageView.layer.cornerRadius = 10
+            adCell.backgroundColorImageView.clipsToBounds = true
+            adCell.backgroundColorImageView.backgroundColor = adColor.randomElement()
+            
+            if let title = row.title {
+                adCell.adLabel.commonUI(title, line: 2, textAlignment: .center, textColor: .label, size: 14, weight: .bold)
+            }
+              
+            let spacing = "  "
+            adCell.badgeLabel.commonUI(" AD\(spacing)", line: 1, textAlignment: .center, textColor: .label, size: 13, weight: .medium)
+            adCell.badgeLabel.layer.cornerRadius = 5
+            adCell.badgeLabel.clipsToBounds = true
+            adCell.badgeLabel.backgroundColor = .white
+
             return adCell
         }
         
@@ -193,4 +206,5 @@ class DetailInfoTableViewController: UITableViewController {
         - 알고보니 내가 재사용하는 셀을 미리 다 만들어 할당한 후에 ad가 true, false인지에 따라 2개의
           셀을 나눠주면서, 이미 indexPath.row에 중복되도록 2개의 셀이 들어가면서 발생.
         - 처음부터 if문으로 ad의 Bool 값에 따라 조건을 나눠주어 return 하여 해결
+        ===> 또 이렇게 애초에 나누다 보니 광고가 없을 때 infoCell에서 nil 값에 대한 else 대응이 없어도 될 것 같음
  */
