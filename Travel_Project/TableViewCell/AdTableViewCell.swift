@@ -9,6 +9,8 @@ import UIKit
 
 class AdTableViewCell: UITableViewCell {
 
-
-
+    @IBOutlet var badgeLabel: UILabel!
+    @IBOutlet var adLabel: UILabel!
+    @IBOutlet var backgroundColorImageView: UIImageView!
+    
 }

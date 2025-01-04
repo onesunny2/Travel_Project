@@ -75,6 +75,7 @@ class MagazineTableViewController: UITableViewController {
         
         let row = magazines.magazine[indexPath.row]
         
+        /*
         if let url = row.photo_image {
             cell.magazineImageView.kf.setImage(with: URL(string: url))
         } else {
@@ -82,6 +83,10 @@ class MagazineTableViewController: UITableViewController {
         }
         cell.magazineImageView.contentMode = .scaleAspectFill
         cell.magazineImageView.layer.cornerRadius = 10
+         */
+        
+        // 두번째 탭바하면서 사용한 확장 메서드 활용
+        cell.magazineImageView.useKf2(url: row.photo_image, 10)
         
         cell.mainTitleLabel.commonUI(row.title, line: 2, textColor: .label, size: 22, weight: .bold)
         cell.subTitleLabel.commonUI(row.subtitle, line: 1, size: 15)
