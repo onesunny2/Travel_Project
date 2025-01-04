@@ -77,6 +77,32 @@ class DetailInfoTableViewController: UITableViewController {
         infoCell.likeButton.tag = indexPath.row // 여기서 태그 값 설정해주기
         infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
         
+        if let title = row.title, let description = row.description {
+            infoCell.titleLabel[0].commonUI(title, line: 1, textColor: .label, size: 15, weight: .bold)
+            infoCell.titleLabel[1].commonUI(description, line: 0, size: 13)
+        } else {
+            infoCell.titleLabel[0].text = ""
+            infoCell.titleLabel[1].text = ""
+        }
+        
+        if let grade = row.grade {
+            let grade = grade.rounded()
+            let intGrade = Int(grade)
+            for index in 0...intGrade - 1 {
+                    infoCell.gradeImageView[index].image = UIImage(named: "star")
+                    infoCell.gradeImageView[index].contentMode = .scaleAspectFit
+            }
+            
+            // 위에서 5개를 못채우면 남은 애들 히든 필요해!
+            if (5 - intGrade) != 0 && intGrade < 5 {
+                // 만약 intGrade = 4 -> index 4 히든
+                // 만약 intGrade = 3 -> index 3,4 히든
+                for index in intGrade...4 {
+                    infoCell.gradeImageView[index].isHidden = true
+                }
+            }
+        }
+        
         return infoCell
     }
     
@@ -106,7 +132,12 @@ class DetailInfoTableViewController: UITableViewController {
             - reloadRow를 했을 때는 해당 열의 데이터만 바뀌니 문제가 없어 보이는데 indexPath.row와 sender.tag값도 연동을 했는데
               왜 자꾸 reloadData()는 다른 열의 버튼이 사라지거나 같이 바뀌거나 하는걸까... print도 찍어보고 코드의 순서도 바꿔보고 했는데 찾지 못함
         ㄴ 그래서 nil 값일 때는 버튼을 아예 hidden 처리 해봤더니 더 깔끔한 것 같다
-    
  
+    - 타이틀 구현
+        ㄴ 디자인 요소는 이를 고려해 첫번째 탭바에서 만들어두었던 extension 재사용 예정
+    
+    - 별점 구현
+        ㄴ 데이터 속 grade가 소숫점인데 반올림으로 올려서 갯수를 채워볼 예정 -> 총 5개말고 우선은 별 갯수만 맞춰보는걸로
+        ㄴ 별 5개가 들어갈 이미지뷰 5개로 저장 label과 함께 stackView로 묶음 => ❔첨에 왜 빈 공간 안줄어들어! 했는데 로직설정을 잘못했었다. 별 갯수를 채우고 남는 애들을 따로 히든 처리 해야한다 => for문 역순으로도 index 셀 수 있을 줄 알았는데 lower bound upper bound 이슈로 터짐!
  
  */
