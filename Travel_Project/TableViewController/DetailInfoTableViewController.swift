@@ -75,11 +75,6 @@ class DetailInfoTableViewController: UITableViewController {
                 infoCell.likeButton.setTitle("", for: .normal)
                 infoCell.likeButton.tintColor = .red
     //            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-            } else {
-    //            infoCell.likeButton.setImage(UIImage(), for: .normal)
-    //            infoCell.likeButton.setTitle("", for: .normal)
-                
-                infoCell.likeButton.isHidden = true
             }
             
             infoCell.likeButton.tag = indexPath.row // 여기서 태그 값 설정해주기
@@ -88,9 +83,6 @@ class DetailInfoTableViewController: UITableViewController {
             if let title = row.title, let description = row.description {
                 infoCell.titleLabel[0].commonUI(title, line: 1, textColor: .label, size: 15, weight: .bold)
                 infoCell.titleLabel[1].commonUI(description, line: 0, size: 13)
-            } else {
-                infoCell.titleLabel[0].text = ""
-                infoCell.titleLabel[1].text = ""
             }
             
             if let grade = row.grade {
@@ -114,8 +106,6 @@ class DetailInfoTableViewController: UITableViewController {
             if let save = row.save {
                 let formatted = save.formatted()
                 infoCell.saveLabel.commonUI("• 저장 \(formatted)", line: 1, textColor: .systemGray2, size: 12)
-            } else {
-                infoCell.saveLabel.isHidden = true
             }
             
             return infoCell
