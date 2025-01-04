@@ -98,7 +98,9 @@ class DetailInfoTableViewController: UITableViewController {
                     // 만약 intGrade = 4 -> index 4 히든
                     // 만약 intGrade = 3 -> index 3,4 히든
                     for index in intGrade...4 {
-                        infoCell.gradeImageView[index].isHidden = true
+//                        infoCell.gradeImageView[index].isHidden = true
+                        // 히든 대신 회색 별 넣기
+                        infoCell.gradeImageView[index].image = UIImage(named: "graystar")
                     }
                 }
             }
@@ -111,7 +113,11 @@ class DetailInfoTableViewController: UITableViewController {
             return infoCell
         } else {  // 이렇게 경우의 수가 나눠지면서 위쪽에 nil에 대해 대응했던 코드는 사실상 없어도 무방
             
+            // 🙋🏻‍♀️🙋🏻‍♀️ 질문! 과제 내 이미지처럼 광고 셀 위아래에만 두게 하는 코드적 방법이 있나요?? 꼼수로.. uiview를 구분선 가리게 얹어봤는데 실패...
+            
             guard let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
+            
+            
             
             adCell.backgroundColorImageView.layer.cornerRadius = 10
             adCell.backgroundColorImageView.clipsToBounds = true
@@ -137,11 +143,13 @@ class DetailInfoTableViewController: UITableViewController {
         
         var height: CGFloat = 0
         
-        if travelInfos.travel[indexPath.row].ad {
+        height = travelInfos.travel[indexPath.row].ad ? 80 : 160
+        
+        /* if travelInfos.travel[indexPath.row].ad {
             height = 80
         } else {
             height = 160
-        }
+        } */
         
         return height
     }
@@ -175,6 +183,7 @@ class DetailInfoTableViewController: UITableViewController {
     - 별점 구현
         ㄴ 데이터 속 grade가 소숫점인데 반올림으로 올려서 갯수를 채워볼 예정 -> 총 5개말고 우선은 별 갯수만 맞춰보는걸로
         ㄴ 별 5개가 들어갈 이미지뷰 5개로 저장 label과 함께 stackView로 묶음 => ❔첨에 왜 빈 공간 안줄어들어! 했는데 로직설정을 잘못했었다. 별 갯수를 채우고 남는 애들을 따로 히든 처리 해야한다 => for문 역순으로도 index 셀 수 있을 줄 알았는데 lower bound upper bound 이슈로 터짐!
+        ㄴ 이번엔 히든처리 말고 회색 별 진짜 넣어보자ㅏ
  
     - 저장 횟수 구현
         ㄴ 이것도 extension 재사용 해보자! ✅✅ 재사용 연습을 해봐야 공통으로 잘 쓰일 extension을 나중에 더 잘 쓸 수 있을 것 같다
