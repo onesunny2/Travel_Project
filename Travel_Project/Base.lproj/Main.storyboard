@@ -127,25 +127,27 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bLd-lz-aJF">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VkC-K1-W9K">
                                             <rect key="frame" x="339" y="24" width="26" height="26"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="26" id="4OA-bL-FB0"/>
-                                                <constraint firstAttribute="width" secondItem="bLd-lz-aJF" secondAttribute="height" multiplier="1:1" id="tej-p3-BXr"/>
+                                                <constraint firstAttribute="width" secondItem="VkC-K1-W9K" secondAttribute="height" multiplier="1:1" id="8hW-Lj-GtN"/>
+                                                <constraint firstAttribute="width" constant="26" id="eP0-L0-bMr"/>
                                             </constraints>
-                                        </imageView>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        </button>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="bLd-lz-aJF" secondAttribute="trailing" constant="28" id="25z-6u-pri"/>
                                         <constraint firstItem="9Z1-QF-50a" firstAttribute="leading" secondItem="BN8-rs-BJo" secondAttribute="trailing" constant="8" symbolic="YES" id="A41-KS-vdP"/>
                                         <constraint firstItem="kHM-OJ-KOv" firstAttribute="top" secondItem="ufg-1W-A4L" secondAttribute="top" constant="16" id="AD1-T8-lFm"/>
                                         <constraint firstItem="kHM-OJ-KOv" firstAttribute="leading" secondItem="ufg-1W-A4L" secondAttribute="leading" constant="20" id="BC3-um-WGP"/>
                                         <constraint firstItem="ZIN-qu-8VI" firstAttribute="top" secondItem="ufg-1W-A4L" secondAttribute="top" constant="16" id="BrO-kP-CiS"/>
                                         <constraint firstAttribute="trailing" secondItem="ZIN-qu-8VI" secondAttribute="trailing" constant="20" id="M8e-QF-fyT"/>
-                                        <constraint firstItem="bLd-lz-aJF" firstAttribute="top" secondItem="ufg-1W-A4L" secondAttribute="top" constant="24" id="TRW-I3-Nro"/>
                                         <constraint firstAttribute="bottom" secondItem="ZIN-qu-8VI" secondAttribute="bottom" constant="16" id="ZW6-sh-qdR"/>
                                         <constraint firstItem="IZh-Gt-rlo" firstAttribute="leading" secondItem="ufg-1W-A4L" secondAttribute="leading" constant="20" id="a1A-gC-cNK"/>
                                         <constraint firstItem="BN8-rs-BJo" firstAttribute="leading" secondItem="ufg-1W-A4L" secondAttribute="leading" constant="20" id="cLL-nf-WGF"/>
+                                        <constraint firstAttribute="trailing" secondItem="VkC-K1-W9K" secondAttribute="trailing" constant="28" id="khk-dq-ch3"/>
+                                        <constraint firstItem="VkC-K1-W9K" firstAttribute="top" secondItem="ufg-1W-A4L" secondAttribute="top" constant="24" id="pE6-BU-RP3"/>
                                         <constraint firstItem="IZh-Gt-rlo" firstAttribute="top" secondItem="kHM-OJ-KOv" secondAttribute="bottom" constant="4" id="trW-aN-wAi"/>
                                         <constraint firstItem="BN8-rs-BJo" firstAttribute="top" secondItem="IZh-Gt-rlo" secondAttribute="bottom" constant="10" id="vTo-Gq-aiN"/>
                                         <constraint firstItem="9Z1-QF-50a" firstAttribute="centerY" secondItem="BN8-rs-BJo" secondAttribute="centerY" id="vf6-2e-RTf"/>
@@ -154,7 +156,7 @@
                                 <connections>
                                     <outlet property="cityImageView" destination="ZIN-qu-8VI" id="Hdw-qe-Oxz"/>
                                     <outlet property="gradeImageView" destination="BN8-rs-BJo" id="o4A-PT-007"/>
-                                    <outlet property="likeImageView" destination="bLd-lz-aJF" id="HGZ-zM-WS9"/>
+                                    <outlet property="likeButton" destination="VkC-K1-W9K" id="DDl-V0-eVP"/>
                                     <outlet property="saveLabel" destination="9Z1-QF-50a" id="1ZK-ur-JBl"/>
                                     <outletCollection property="titleLabel" destination="kHM-OJ-KOv" collectionClass="NSMutableArray" id="885-Jc-YD3"/>
                                     <outletCollection property="titleLabel" destination="IZh-Gt-rlo" collectionClass="NSMutableArray" id="Y2I-8f-UWI"/>
