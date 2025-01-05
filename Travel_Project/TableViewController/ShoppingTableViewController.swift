@@ -20,11 +20,11 @@ class ShoppingTableViewController: UITableViewController {
         
         textfieldBgImageView.commonUI()
         shoppingTextfield.commonUI()
-        buttonUI()
+        textButtonUI()
     }
     
-    // 버튼 디자인
-    func buttonUI() {
+    // text 버튼 디자인
+    func textButtonUI() {
         
 //        let padding = "  "  >> 버튼은 기본 여백이 있어서 꼼수 없어도 괜찮음
         
@@ -35,6 +35,16 @@ class ShoppingTableViewController: UITableViewController {
         addButton.configuration?.buttonSize = .medium
     }
     
+    // symbol 버튼 디자인
+    func symbolButtonUI(_ button: UIButton, _ bool: Bool, _ trueName: String, _ falseName: String) {
+        
+        let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
+        
+        button.setTitle("", for: .normal)
+        button.setImage(UIImage(systemName: bool ? trueName : falseName, withConfiguration: symbolConfig), for: .normal)
+        button.tintColor = .label
+    }
+
     @IBAction func endOnExitTextfield(_ sender: UITextField) {
     }
     
@@ -76,6 +86,7 @@ class ShoppingTableViewController: UITableViewController {
             cell.checkboxButton.tintColor = .label
         } */
         
+        /* 다시 한번 공통요소 묶어서 줄이기
         cell.checkboxButton.setTitle("", for: .normal)
         let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
         cell.checkboxButton.setImage(UIImage(systemName: row.check ? "checkmark.square.fill" : "checkmark.square", withConfiguration: symbolConfig), for: .normal)
@@ -83,7 +94,10 @@ class ShoppingTableViewController: UITableViewController {
         
         cell.favoriteButton.setTitle("", for: .normal)
         cell.favoriteButton.setImage(UIImage(systemName: row.favorite ? "star.fill" : "star", withConfiguration: symbolConfig), for: .normal)
-        cell.favoriteButton.tintColor = .label
+        cell.favoriteButton.tintColor = .label */
+        
+        symbolButtonUI(cell.checkboxButton, row.check, "checkmark.square.fill", "checkmark.square")
+        symbolButtonUI(cell.favoriteButton, row.favorite, "star.fill", "star")
         
         return cell
     }
