@@ -72,9 +72,41 @@ class ShoppingTableViewController: UITableViewController {
             // 처음에 sender.tag를 이용해봤는데 여기서의 sender는 추가버튼 그 자체였어서.. 총 리스트 갯수의 -1 index에 추가하는걸로
             tableView.insertRows(at: [IndexPath(row: shoppinglists.shopping.count - 1, section: 0)], with: .none)
             
+//            tableView.reloadRows(at: [IndexPath(row: shoppinglists.shopping.count - 1, section: 0)], with: .none)  >>>> 이건 정말 기존에 존재하던 열을 리로드 해주는 것 같다 경고문을 보니... 앱이 터져버린다
+//            tableView.cellForRow(at: IndexPath(row: shoppinglists.shopping.count - 1, section: 0)) >> 이 친구는 정말 특정 indexPath에 존재하는 셀을 불러오는 역할이라서 여기에 맞지 않음
+            
             view.endEditing(true)
             shoppingTextfield.text = ""
         }
+    }
+    
+    // 체크박스 변경 함수
+    @objc func clickCheckbox(_ button: UIButton) {
+        
+        let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
+        
+        if shoppinglists.shopping[button.tag].check {
+            button.setImage(UIImage(systemName: "checkmark.square", withConfiguration: symbolConfig), for: .normal)
+            shoppinglists.shopping[button.tag].check = false
+        } else {
+            button.setImage(UIImage(systemName: "checkmark.square.fill", withConfiguration: symbolConfig), for: .normal)
+            shoppinglists.shopping[button.tag].check = true
+        }
+    }
+    
+    @objc func clickFavorite(_ button: UIButton) {
+        
+        let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
+        
+        if shoppinglists.shopping[button.tag].favorite {
+            button.setImage(UIImage(systemName: "star", withConfiguration: symbolConfig), for: .normal)
+            shoppinglists.shopping[button.tag].favorite = false
+        } else {
+            button.setImage(UIImage(systemName: "star.fill", withConfiguration: symbolConfig), for: .normal)
+            shoppinglists.shopping[button.tag].favorite = true
+        }
+        
+        print(shoppinglists.shopping[button.tag].keyword, shoppinglists.shopping[button.tag].favorite)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -113,8 +145,13 @@ class ShoppingTableViewController: UITableViewController {
         cell.favoriteButton.tintColor = .label */
         
         symbolButtonUI(cell.checkboxButton, row.check, "checkmark.square.fill", "checkmark.square")
-        cell.checkboxButton.tag = indexPath.row
         symbolButtonUI(cell.favoriteButton, row.favorite, "star.fill", "star")
+        cell.checkboxButton.tag = indexPath.row
+        cell.favoriteButton.tag = indexPath.row
+        
+        // 체크박스랑 즐겨찾기 액션 🙋🏻‍♀️🙋🏻‍♀️🙋🏻‍♀️ 질문! 왜 같은 로직을 사용했는데, 즐겨찾기에서는 버튼을 두번 눌러야 이미지가 바뀔까요..? >> 이유를 찾았습니다ㅠ 체크박스만 tag 연결해주고 즐겨찾기를 잊었다는 사실.. 그래서 제대로 indexPath를 찾지못한... print 디버깅은 체고
+        cell.checkboxButton.addTarget(self, action: #selector(clickCheckbox), for: .touchUpInside)
+        cell.favoriteButton.addTarget(self, action: #selector(clickFavorite), for: .touchUpInside)
         
         return cell
     }
@@ -139,6 +176,8 @@ class ShoppingTableViewController: UITableViewController {
     (셀 디자인 및 데이터)
     - 체크박스랑 즐겨찾기 버튼의 디자인 구성이 동일해서 함수화를 통해 묶는 방법으로 재정리
     - 리스트 추가는 배열에 append한 마지막 순서만 reload 할 수 있도록 해봄 (이게 메모리..?에 더 효율적일 것 같다)
+        ㄴ 특정 열만 reloadrow하는 메서드도 있길래 테스트 >> 기존에 존재한 열을 리로드하는 역할로 앱이 터짐
+        ㄴ row 관련된 다른 추가 메서드 있나 확인하다 cellForRow 메서드 실험해봤는데, 기존에 있는 열을 불러오는 기능 발견(언젠가 쓰이겠지)
     -
  
  */
