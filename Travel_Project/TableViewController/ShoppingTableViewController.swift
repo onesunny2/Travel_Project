@@ -171,7 +171,7 @@ class ShoppingTableViewController: UITableViewController {
         cell.checkboxButton.addTarget(self, action: #selector(clickCheckbox), for: .touchUpInside)
         cell.favoriteButton.addTarget(self, action: #selector(clickFavorite), for: .touchUpInside)
         
-        // 기능 하나로 합친 함수 사용 🙋🏻‍♀️🙋🏻‍♀️🙋🏻‍♀️ 질문! addTarget으로 액션을 연결하기 위해서는 버튼 외 매개변수가 달린 함수를 작성해 사용이 불가한가요?
+        // 기능 하나로 합친 함수 사용 🙋🏻‍♀️🙋🏻‍♀️🙋🏻‍♀️ 질문! addTarget으로 액션을 연결하기 위해서는 버튼 외 매개변수가 달린 함수를 작성해 사용이 불가한가요? 구글링했을 때는 버튼, 텍스트필드 같은 주체가 되는 애들만 전달 가능하다는 것으로 인지했는데 맞는건지...
 //        cell.checkboxButton.addTarget(self, action: #selector(clickedButton(self, row.check, "checkmark.square.fill", "checkmark.square")), for: .touchUpInside)
         
         return cell
@@ -179,6 +179,26 @@ class ShoppingTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
+    }
+    
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        
+        // UIContextualAction가 스와이프 액션을 직접적으로 구현해준다고 함
+        let delete = UIContextualAction(style: .normal, title: "삭제") { (action, view, completionHandler: @escaping (Bool) -> Void) in
+            
+//            view.backgroundColor = .red >> 꾸미는건 밖에서 변수를 활용해야 적용되는 듯 하다
+            
+            self.shoppinglists.shopping.remove(at: indexPath.row)  // 해당 부분.. 강한참조 약한참조 공부 필요 메모해두기
+            tableView.deleteRows(at: [IndexPath(row: indexPath.row, section: 0)], with: .none)
+            tableView.reloadData()  // ⭐️⭐️ 삭제라서 그냥 데이터가 날라가보이지만, reload 해주지 않으면, 체크박스나 즐찾 버튼을 누르는 순간 index out of range로 앱이 터진다
+            
+            completionHandler(true)
+        }
+        
+        delete.backgroundColor = UIColor.red
+//        delete.title = "삭제"  >> 이 부분은 위에 title에서 설정해도 동일한 작동을 함
+        
+        return UISwipeActionsConfiguration(actions: [delete])  // 커스텀 액션들의 '집합'이기 때문에 배열로 액션 리턴함
     }
 
 }
@@ -201,5 +221,10 @@ class ShoppingTableViewController: UITableViewController {
         ㄴ row 관련된 다른 추가 메서드 있나 확인하다 cellForRow 메서드 실험해봤는데, 기존에 있는 열을 불러오는 기능 발견(언젠가 쓰이겠지)
     - 체크박스와 즐겨찾기 경우의 수 나누어 버튼 클릭 시 액션 구현 완료
         ㄴ 사실 상 둘의 작동방식이 거의 동일하여 1개로 합쳐보기
- 
+
+    (우측 스와이프 액션)
+    ** 나의 생각 흐름 : 스와이프 가능한 tableview의 기능 찾아서 -> 현재 내가 지우려는 셀의 indexPath.row를 인식시켜 delete 해서 데이터 리로드 한다
+    - trailingSwipeActionsConfigurationForRowAt : 해당 메서드를 사용하면 될 것 같은데 이 메서드의 반환 값인 UISwipeActionsConfiguration은 설명을 보니 대략적으로
+      내가 선택한 셀에서 하고싶은 커스텀 액션들의 집합 느낌!
+    - UIContextualAction를 통해서 커스텀 액션을 만든다고 한다
  */
