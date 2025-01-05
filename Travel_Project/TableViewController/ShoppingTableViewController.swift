@@ -52,13 +52,29 @@ class ShoppingTableViewController: UITableViewController {
         
         guard let keyword = shoppingTextfield.text else { return }
         
-        let newList = Shopping(keyword: keyword, check: false, favorite: false)
-        shoppinglists.shopping.append(newList)
-        
-        tableView.reloadData()
-        
-        view.endEditing(true)
-        shoppingTextfield.text = ""
+        // 아무것도 입력하지 않은건 추가를 막고싶을 때
+        if keyword.count == 0 {
+            
+            // 알럿창으로 경고문 띄우기
+            let message = UIAlertController(title: "알림", message: "구매하시려는 목록을 다시 확인해주세요!", preferredStyle: .alert)
+            let okay = UIAlertAction(title: "확인", style: .cancel)
+            message.addAction(okay)
+            present(message, animated: true)
+            
+            view.endEditing(true)
+            shoppingTextfield.text = ""
+        } else {
+            
+            let newList = Shopping(keyword: keyword, check: false, favorite: false)
+            shoppinglists.shopping.append(newList)
+            
+            //        tableView.reloadData()
+            // 처음에 sender.tag를 이용해봤는데 여기서의 sender는 추가버튼 그 자체였어서.. 총 리스트 갯수의 -1 index에 추가하는걸로
+            tableView.insertRows(at: [IndexPath(row: shoppinglists.shopping.count - 1, section: 0)], with: .none)
+            
+            view.endEditing(true)
+            shoppingTextfield.text = ""
+        }
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,6 +113,7 @@ class ShoppingTableViewController: UITableViewController {
         cell.favoriteButton.tintColor = .label */
         
         symbolButtonUI(cell.checkboxButton, row.check, "checkmark.square.fill", "checkmark.square")
+        cell.checkboxButton.tag = indexPath.row
         symbolButtonUI(cell.favoriteButton, row.favorite, "star.fill", "star")
         
         return cell
@@ -121,6 +138,7 @@ class ShoppingTableViewController: UITableViewController {
  
     (셀 디자인 및 데이터)
     - 체크박스랑 즐겨찾기 버튼의 디자인 구성이 동일해서 함수화를 통해 묶는 방법으로 재정리
-    
+    - 리스트 추가는 배열에 append한 마지막 순서만 reload 할 수 있도록 해봄 (이게 메모리..?에 더 효율적일 것 같다)
+    -
  
  */
