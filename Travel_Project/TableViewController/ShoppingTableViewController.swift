@@ -94,6 +94,7 @@ class ShoppingTableViewController: UITableViewController {
         }
     }
     
+    // 즐겨찾기 변경 함수
     @objc func clickFavorite(_ button: UIButton) {
         
         let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
@@ -107,6 +108,23 @@ class ShoppingTableViewController: UITableViewController {
         }
         
         print(shoppinglists.shopping[button.tag].keyword, shoppinglists.shopping[button.tag].favorite)
+    }
+    
+    // 체크박스, 즐겨찾기 변경함수 통일
+    @objc func clickedButton(_ button: UIButton, _ bool: Bool, _ trueImage: String, _ falseImage: String) {
+        
+        let symbolConfig = UIImage.SymbolConfiguration(scale: .medium)
+        let row = shoppinglists.shopping[button.tag]
+        
+        button.setImage(UIImage(systemName: bool ? trueImage : falseImage, withConfiguration: symbolConfig), for: .normal)
+        
+        if bool == row.check {
+            shoppinglists.shopping[button.tag].check.toggle()
+        } else if bool == row.favorite {
+            shoppinglists.shopping[button.tag].favorite.toggle()
+        }
+        
+//        shoppinglists.shopping[button.tag].((bool == row.check) ? check : favorite).toggle() >> 이런 삼항 연산자는 안되는걸로...
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -149,9 +167,12 @@ class ShoppingTableViewController: UITableViewController {
         cell.checkboxButton.tag = indexPath.row
         cell.favoriteButton.tag = indexPath.row
         
-        // 체크박스랑 즐겨찾기 액션 🙋🏻‍♀️🙋🏻‍♀️🙋🏻‍♀️ 질문! 왜 같은 로직을 사용했는데, 즐겨찾기에서는 버튼을 두번 눌러야 이미지가 바뀔까요..? >> 이유를 찾았습니다ㅠ 체크박스만 tag 연결해주고 즐겨찾기를 잊었다는 사실.. 그래서 제대로 indexPath를 찾지못한... print 디버깅은 체고
+        // 체크박스랑 즐겨찾기 액션 >> 왜 같은 로직을 사용했는데, 즐겨찾기에서는 버튼을 두번 눌러야 이미지가 바뀔까요..? >> 이유를 찾았습니다ㅠ 체크박스만 tag 연결해주고 즐겨찾기를 잊었다는 사실.. 그래서 제대로 indexPath를 찾지못한... print 디버깅은 체고
         cell.checkboxButton.addTarget(self, action: #selector(clickCheckbox), for: .touchUpInside)
         cell.favoriteButton.addTarget(self, action: #selector(clickFavorite), for: .touchUpInside)
+        
+        // 기능 하나로 합친 함수 사용 🙋🏻‍♀️🙋🏻‍♀️🙋🏻‍♀️ 질문! addTarget으로 액션을 연결하기 위해서는 버튼 외 매개변수가 달린 함수를 작성해 사용이 불가한가요?
+//        cell.checkboxButton.addTarget(self, action: #selector(clickedButton(self, row.check, "checkmark.square.fill", "checkmark.square")), for: .touchUpInside)
         
         return cell
     }
@@ -178,6 +199,7 @@ class ShoppingTableViewController: UITableViewController {
     - 리스트 추가는 배열에 append한 마지막 순서만 reload 할 수 있도록 해봄 (이게 메모리..?에 더 효율적일 것 같다)
         ㄴ 특정 열만 reloadrow하는 메서드도 있길래 테스트 >> 기존에 존재한 열을 리로드하는 역할로 앱이 터짐
         ㄴ row 관련된 다른 추가 메서드 있나 확인하다 cellForRow 메서드 실험해봤는데, 기존에 있는 열을 불러오는 기능 발견(언젠가 쓰이겠지)
-    -
+    - 체크박스와 즐겨찾기 경우의 수 나누어 버튼 클릭 시 액션 구현 완료
+        ㄴ 사실 상 둘의 작동방식이 거의 동일하여 1개로 합쳐보기
  
  */
