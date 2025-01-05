@@ -260,7 +260,7 @@
             </objects>
             <point key="canvasLocation" x="1295.4198473282443" y="757.74647887323943"/>
         </scene>
-        <!--Shopping Table View Controller-->
+        <!--쇼핑-->
         <scene sceneID="ZE1-co-BJZ">
             <objects>
                 <tableViewController id="6Uv-ot-jPR" customClass="ShoppingTableViewController" customModule="Travel_Project" customModuleProvider="target" sceneMemberID="viewController">
@@ -279,11 +279,17 @@
                                     <rect key="frame" x="282" y="25.000000000000004" width="75" height="34.333333333333343"/>
                                     <state key="normal" title="Button"/>
                                     <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                    <connections>
+                                        <action selector="addButtonTapped:" destination="6Uv-ot-jPR" eventType="touchUpInside" id="Zwd-Jd-QDA"/>
+                                    </connections>
                                 </button>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JBb-99-ox9">
                                     <rect key="frame" x="36" y="25" width="236" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <action selector="endOnExitTextfield:" destination="6Uv-ot-jPR" eventType="editingDidEndOnExit" id="nMi-pb-Zfh"/>
+                                    </connections>
                                 </textField>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -362,7 +368,7 @@
                             <outlet property="delegate" destination="6Uv-ot-jPR" id="ApG-Tc-lIf"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" id="HSx-WG-V5k"/>
+                    <navigationItem key="navigationItem" title="쇼핑" id="HSx-WG-V5k"/>
                     <connections>
                         <outlet property="addButton" destination="qRS-XZ-rFo" id="eOW-TU-mYa"/>
                         <outlet property="shoppingTextfield" destination="JBb-99-ox9" id="uge-X1-B8U"/>

@@ -29,4 +29,12 @@ extension UIImageView {
         self.contentMode = .scaleAspectFill
         self.layer.cornerRadius = corner
     }
+    
+    // 일반 배경 처리
+    func commonUI(corner: CGFloat = 10, mask: Bool = true) {
+        
+        self.layer.cornerRadius = corner
+        self.layer.masksToBounds = mask
+        self.backgroundColor = .systemGray6
+    }
 }
