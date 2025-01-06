@@ -8,7 +8,7 @@
 import UIKit
 
 /*
- 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다... 관련 코드들은 눈 감고 지나쳐주시면 될 것 같아요ㅠㅠ
+ 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다... 관련 코드들와 스토리보드 UI는 눈 감고 지나쳐주시면 될 것 같아요ㅠㅠ
  */
 
 class PopularNationTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -57,41 +57,9 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
         self.tableView.reloadData()
     }
     
-    @IBAction func exitTextfield(_ sender: UITextField) {
+    func reloadOriginalData() {
         
-        guard let keyword = sender.text else { return }
-        
-        // 공백 상태로 엔터치면 원래 리스트 나오도록 구현
-        if sender.text?.count == 0 {
-            
-            let index = citySegmentedControl.selectedSegmentIndex
-            
-            // segmentcontrol 인덱스 값이 바뀔 때마다 데이터 reload
-            switch index {
-            case 0:
-                city = cityInfo.city
-                tableView.reloadData()
-            case 1:
-                city = cityInfo.city.filter { $0.domestic_travel == true }
-                tableView.reloadData()
-            case 2:
-                city = cityInfo.city.filter { $0.domestic_travel == false }
-                tableView.reloadData()
-            default:
-                break
-            }
-            
-        } else {
-            
-            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
-            
-            tableView.reloadData()
-        }
-    }
-    
-    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
-        
-        let index = sender.selectedSegmentIndex
+        let index = citySegmentedControl.selectedSegmentIndex
         
         // segmentcontrol 인덱스 값이 바뀔 때마다 데이터 reload
         switch index {
@@ -107,12 +75,43 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
         default:
             break
         }
+    }
+    
+    @IBAction func editingChangedTextfield(_ sender: UITextField) {
+        guard let keyword = sender.text else { return }
         
+        if keyword.count == 0 {
+
+            reloadOriginalData()
+        } else {
+            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
+            
+            tableView.reloadData()
+        }
+    }
+    
+    @IBAction func exitTextfield(_ sender: UITextField) {
         
+        guard let keyword = sender.text else { return }
+        
+        // 공백 상태로 엔터치면 원래 리스트 나오도록 구현
+        if sender.text?.count == 0 {
+            reloadOriginalData()
+        } else {
+            
+            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
+            
+            tableView.reloadData()
+        }
+    }
+    
+    @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
+        reloadOriginalData()
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        /* ✅ 주석 처리된 부분들 공통 문제점: 세그먼트 값이 변하는 위 액션에서 데이터 관리를 다 해주면 되는데
+               여러개의 메서드에서 값이 변할 때 컨트롤을 각기 다르게 해두어 충돌이 났었음 */
 //        let index = citySegmentedControl.selectedSegmentIndex
         
 //        switch index {

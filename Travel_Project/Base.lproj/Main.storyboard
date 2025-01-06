@@ -396,6 +396,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
+                                        <action selector="editingChangedTextfield:" destination="Lpn-m8-VSX" eventType="editingChanged" id="fFn-km-WaQ"/>
                                         <action selector="exitTextfield:" destination="Lpn-m8-VSX" eventType="editingDidEndOnExit" id="eir-SW-PxF"/>
                                     </connections>
                                 </textField>
