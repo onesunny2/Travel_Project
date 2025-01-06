@@ -15,15 +15,7 @@ class DetailInfoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        // 아래는 실패한 방법
-        /* if UITableViewCell.self == DetailInfoTableViewCell.self {
-            tableView.rowHeight = 160
-        } else if UITableViewCell.self == AdTableViewCell.self {
-            tableView.rowHeight = 80
-        } */
-        
+
     }
     
     // 좋아요 버튼 눌렀을 때, true - false 값 서로 스위칭 되도록
@@ -34,9 +26,6 @@ class DetailInfoTableViewController: UITableViewController {
 
         travelInfos.travel[sender.tag].like = bool ? false : true
  
-        /* 🙋🏻‍♀️🙋🏻‍♀️ 질문! 왜 reloadData를 하면 bool 값이 있던 다른 열의 버튼이 사라지거나 버튼이 적용되거나 할까요..? print도 찍어보고 아래에서 tag를 달아주는 순서도 바꿔봤지만 해결하지 못했습니다ㅠㅠ
-            ㄴ 검색해보니 재사용셀에서 bool 값의 상태변화 같은 애들의 속성이 뒤섞이는 오류와 함께 delegate 패턴 어쩌고의 이유라고 하는데 맞는 이유일지는.. 이해를 온전히 하지 못해서ㅠㅠ (왠만하면 효율을 위해 reloadRows, insertRows등 사용을 추천)  */
-//        tableView.reloadData()
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
     }
     
@@ -62,14 +51,8 @@ class DetailInfoTableViewController: UITableViewController {
         
         if row.ad != true {
             
-            guard let infoCell = tableView.dequeueReusableCell(withIdentifier: "DetailInfoTableViewCell", for: indexPath) as? DetailInfoTableViewCell else { return UITableViewCell() }
+            guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Identifier.travelInfo.rawValue, for: indexPath) as? DetailInfoTableViewCell else { return UITableViewCell() }
             
-            // extension 사용 버전1
-            /* if let url = row.travel_image {
-                infoCell.cityImageView.useKf1(url: url)
-            } */
-            
-            // extension 사용 버전2
             infoCell.cityImageView.useKf2(url: row.travel_image)
             
             /* if row.like == true {

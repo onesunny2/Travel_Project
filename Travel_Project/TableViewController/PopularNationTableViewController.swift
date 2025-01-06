@@ -8,7 +8,7 @@
 import UIKit
 
 /*
- 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다...
+ 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다... 관련 코드들은 눈 감고 지나쳐주시면 될 것 같아요ㅠㅠ
  */
 
 class PopularNationTableViewController: UITableViewController, UISearchResultsUpdating {
@@ -34,8 +34,8 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let nib = UINib(nibName: PopularNationTableViewCell.identifier, bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: PopularNationTableViewCell.identifier)
+        let nib = UINib(nibName: Identifier.city.rawValue, bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: Identifier.city.rawValue)
         
         searchTextfield.searchCity()
         
@@ -132,7 +132,7 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
         
 //        let segIndex = citySegmentedControl.selectedSegmentIndex
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: PopularNationTableViewCell.identifier, for: indexPath) as? PopularNationTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.city.rawValue, for: indexPath) as? PopularNationTableViewCell else { return UITableViewCell() }
         
        /* switch segIndex {
         case 0:

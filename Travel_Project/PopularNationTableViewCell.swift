@@ -16,7 +16,7 @@ class PopularNationTableViewCell: UITableViewCell {
     @IBOutlet var detailLabel: UILabel!
     @IBOutlet var backgroundImageView: UIImageView!
     
-    static var identifier = "PopularNationTableViewCell"
+//    static var identifier = "PopularNationTableViewCell"
     
     override func awakeFromNib() {
         super.awakeFromNib()

@@ -149,7 +149,7 @@ class ShoppingTableViewController: UITableViewController {
         
         let row = shoppinglists.shopping[indexPath.row]
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShoppingTableViewCell", for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.shopping.rawValue, for: indexPath) as? ShoppingTableViewCell else { return UITableViewCell() }
         
         cell.backgroundImageView.commonUI()
         cell.itemLabel.commonUI(row.keyword, line: 1, textAlignment: .left, textColor: .label, size: 13, weight: .regular)

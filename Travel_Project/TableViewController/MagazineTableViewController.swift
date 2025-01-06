@@ -15,54 +15,7 @@ class MagazineTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // let magazines = MagazineInfo()  -> viewDidLoad에 적으면 이미 실행되고 난 후라 이후 외부에서는 인식 못하는 것 같다!
-    }
-    
-    // 문자열을 날짜로 바꾸는 함수
-    func stringToDateToString(_ date: String) -> String {
-        
-        let uploadDate = date
-        
-        // 이건 현재 문자열 모양대로의 내용을 날짜로 변환하기 위함
-        let dateFormatter1 = DateFormatter()
-        dateFormatter1.dateFormat = "yyMMdd"
-        
-        // 이건 날짜로 변환한 애를 다시 원하는 형태의 문자열로 만들기 위함
-        let dateFormatter2 = DateFormatter()
-        dateFormatter2.dateFormat = "yy년 MM월 dd일"
-        
-        
-        guard let date = dateFormatter1.date(from: uploadDate) else { return "오류" }
-        
-        print(date)
-        
-        let result = dateFormatter2.string(from: date)
-        
-        return result
-    }
-    
-    func stringToDate(_ date: String) -> Date {
-        
-        let uploadDate = date
-        let dateformatter = DateFormatter()
-        
-        dateformatter.dateFormat = "yyMMdd"
-        
-        guard let date = dateformatter.date(from: uploadDate) else { return Date() }
-        
-        return date
-    }
-    
-    func DateToString(_ date: Date) -> String {
-        
-        let date = date
-        let dateformatter = DateFormatter()
-        
-        dateformatter.dateFormat = "yy년 MM월 dd일"
-        
-        let stringDate = dateformatter.string(from: date)  // 문자열의 옵셔널이 나올 수 없음
-        
-        return stringDate
+      
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,42 +24,11 @@ class MagazineTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MagazineTableViewCell", for: indexPath) as? MagazineTableViewCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: Identifier.magazine.rawValue, for: indexPath) as? MagazineTableViewCell else { return UITableViewCell() }
         
         let row = magazines.magazine[indexPath.row]
         
-        /*
-        if let url = row.photo_image {
-            cell.magazineImageView.kf.setImage(with: URL(string: url))
-        } else {
-            cell.magazineImageView.image = UIImage(named: "")
-        }
-        cell.magazineImageView.contentMode = .scaleAspectFill
-        cell.magazineImageView.layer.cornerRadius = 10
-         */
-        
-        // 두번째 탭바하면서 사용한 확장 메서드 활용
-        cell.magazineImageView.useKf2(url: row.photo_image, 10)
-        
-        cell.mainTitleLabel.commonUI(row.title, line: 2, textColor: .label, size: 22, weight: .bold)
-        cell.subTitleLabel.commonUI(row.subtitle, line: 1, size: 15)
-        
-        // 1) 반환값 있는 함수 사용
-//        cell.uploadDateLabel.commonUI(stringToDateToString(row.date), line: 1, textAlignment: .right, size: 13)
-        
-        // 2) 반환값 없는 함수 사용
-       /* let stringToDate = stringToDate(row.date)
-        let dateToString = DateToString(stringToDate)
-        cell.uploadDateLabel.commonUI(dateToString, line: 1, textAlignment: .right, size: 13) */
-        
-        // 3) extension 사용 - Date, String 둘 다 사용
-        /* let changeDate = row.date.stringToDate()
-        let changeString = changeDate.DateToString()
-        cell.uploadDateLabel.commonUI(changeString, line: 1, textAlignment: .right, size: 13) */
-        
-        // 4) extension 사용 - String으로 한번에 사용
-        let changeDate = row.date.stringToDateToString()
-        cell.uploadDateLabel.commonUI(changeDate, line: 1, textAlignment: .right, size: 13)
+        cell.configData(row)
         
         return cell
     }
@@ -115,6 +37,10 @@ class MagazineTableViewController: UITableViewController {
         return 450
     }
 }
+
+
+
+
 
 /*
     (고민 포인트)
