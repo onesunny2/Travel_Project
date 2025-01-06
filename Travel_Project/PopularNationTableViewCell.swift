@@ -20,8 +20,10 @@ class PopularNationTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         // 여기서는 항상 고정값인 label의 투명 배경색과 이미지를 덮는 어두운 배경색 설정
-        labelBackgroundImageView.commonUI(color: .black, opacity: 0.5)
-        backgroundImageView.commonUI(color: .black, opacity: 0.2)
+        labelBackgroundImageView.commonUI(corner: 20, color: .black, opacity: 0.5)
+        labelBackgroundImageView.layer.maskedCorners = CACornerMask.layerMaxXMaxYCorner
+        backgroundImageView.commonUI(corner: 20, color: .black, opacity: 0.2)
+        backgroundImageView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMaxYCorner)
     }
     
     // 이전에 만들어 놓았던 extension들 활용
@@ -33,8 +35,9 @@ class PopularNationTableViewCell: UITableViewCell {
         detailLabel.commonUI(row.city_explain, line: 1, textColor: .white, size: 10, weight: .regular)
         
         guard let url = row.city_image else { return }
-        cityBackgroundImageView.commonUI(color: .clear, contentMode: .scaleAspectFill)
+        cityBackgroundImageView.commonUI(corner: 20, color: .clear, contentMode: .scaleAspectFill)
         cityBackgroundImageView.kf.setImage(with: URL(string: url))
+        cityBackgroundImageView.layer.maskedCorners = CACornerMask(arrayLiteral: .layerMinXMinYCorner, .layerMaxXMaxYCorner)
     }
     
     // 셀 재사용
