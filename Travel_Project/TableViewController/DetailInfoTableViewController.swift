@@ -11,7 +11,6 @@ import Kingfisher
 class DetailInfoTableViewController: UITableViewController {
     
     var travelInfos = TravelInfo()
-    var adColor: [UIColor] = [.systemMint, .systemCyan, .orange, .yellow, .systemGray, .green]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,18 +28,6 @@ class DetailInfoTableViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
     }
     
-    // 저장 숫자 3자리 콤마찍히도록 하는 함수
-    func numberComma(_ number: Int) -> String {
-        
-        let num = number
-        let numberformatter = NumberFormatter()
-        numberformatter.numberStyle = .decimal
-        
-        guard let resultNum = numberformatter.string(from: NSNumber(integerLiteral: num)) else { return "" } // numberFormatter는 NSNumber라는 타입을 받아서 변환해 넣어줘야 함
-        
-        return resultNum
-    }
-    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travelInfos.travel.count
     }
@@ -53,79 +40,16 @@ class DetailInfoTableViewController: UITableViewController {
             
             guard let infoCell = tableView.dequeueReusableCell(withIdentifier: Identifier.travelInfo.rawValue, for: indexPath) as? DetailInfoTableViewCell else { return UITableViewCell() }
             
-            infoCell.cityImageView.useKf2(url: row.travel_image)
-            
-            /* if row.like == true {
-                infoCell.likeButton.setImage(UIImage(systemName: "heart.fill"), for: .normal)
-                infoCell.likeButton.setTitle("", for: .normal)
-                infoCell.likeButton.tintColor = .red
-            } else {
-                infoCell.likeButton.setImage(UIImage(systemName: "heart"), for: .normal)
-                infoCell.likeButton.setTitle("", for: .normal)
-                infoCell.likeButton.tintColor = .red
-            } */
-                    
-            if let like = row.like {
-                infoCell.likeButton.setImage(UIImage(systemName: like ? "heart.fill" : "heart"), for: .normal)
-                infoCell.likeButton.setTitle("", for: .normal)
-                infoCell.likeButton.tintColor = .red
-    //            infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-            }
+            infoCell.infoConfigData(row)
             
             infoCell.likeButton.tag = indexPath.row // 여기서 태그 값 설정해주기
             infoCell.likeButton.addTarget(self, action: #selector(likeButtonTapped), for: .touchUpInside)
-            
-            if let title = row.title, let description = row.description {
-                infoCell.titleLabel[0].commonUI(title, line: 1, textColor: .label, size: 15, weight: .bold)
-                infoCell.titleLabel[1].commonUI(description, line: 0, size: 13)
-            }
-            
-            if let grade = row.grade {
-                let grade = grade.rounded()
-                let intGrade = Int(grade)
-                for index in 0...intGrade - 1 {
-                        infoCell.gradeImageView[index].image = UIImage(named: "star")
-                        infoCell.gradeImageView[index].contentMode = .scaleAspectFit
-                }
-                
-                // 위에서 5개를 못채우면 남은 애들 히든 필요해!
-                if (5 - intGrade) != 0 && intGrade < 5 {
-                    // 만약 intGrade = 4 -> index 4 히든
-                    // 만약 intGrade = 3 -> index 3,4 히든
-                    for index in intGrade...4 {
-//                        infoCell.gradeImageView[index].isHidden = true
-                        // 히든 대신 회색 별 넣기
-                        infoCell.gradeImageView[index].image = UIImage(named: "graystar")
-                    }
-                }
-            }
-            
-            if let save = row.save {
-//                let formatted = save.formatted()
-                let formatted = numberComma(save)  // numberFormatter 사용해본 방법
-                infoCell.saveLabel.commonUI("• 저장 \(formatted)", line: 1, textColor: .systemGray2, size: 12)
-            }
-            
+
             return infoCell
-        } else {  // 이렇게 경우의 수가 나눠지면서 위쪽에 nil에 대해 대응했던 코드는 사실상 없어도 무방
+        } else {
+            guard let adCell = tableView.dequeueReusableCell(withIdentifier: Identifier.ad.rawValue, for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
             
-            // 🙋🏻‍♀️🙋🏻‍♀️ 질문! 과제 내 이미지처럼 광고 셀 위아래에만 두게 하는 코드적 방법이 있나요?? 꼼수로.. uiview를 구분선 가리게 얹어봤는데 실패...
-            
-            guard let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
-            
-            adCell.backgroundColorImageView.layer.cornerRadius = 10
-            adCell.backgroundColorImageView.clipsToBounds = true
-            adCell.backgroundColorImageView.backgroundColor = adColor.randomElement()
-            
-            if let title = row.title {
-                adCell.adLabel.commonUI(title, line: 2, textAlignment: .center, textColor: .label, size: 14, weight: .bold)
-            }
-              
-            let spacing = "  "
-            adCell.badgeLabel.commonUI(" AD\(spacing)", line: 1, textAlignment: .center, textColor: .label, size: 13, weight: .medium)
-            adCell.badgeLabel.layer.cornerRadius = 5
-            adCell.badgeLabel.clipsToBounds = true
-            adCell.badgeLabel.backgroundColor = .white
+            adCell.adConfigData(row)
 
             return adCell
         }
@@ -134,17 +58,8 @@ class DetailInfoTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        var height: CGFloat = 0
-        
-        height = travelInfos.travel[indexPath.row].ad ? 80 : 160
-        
-        /* if travelInfos.travel[indexPath.row].ad {
-            height = 80
-        } else {
-            height = 160
-        } */
-        
+        let height: CGFloat = travelInfos.travel[indexPath.row].ad ? 80 : 160
+
         return height
     }
 
