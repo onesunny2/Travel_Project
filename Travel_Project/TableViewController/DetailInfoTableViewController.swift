@@ -130,8 +130,6 @@ class DetailInfoTableViewController: UITableViewController {
             
             guard let adCell = tableView.dequeueReusableCell(withIdentifier: "adTableViewCell", for: indexPath) as? AdTableViewCell else { return UITableViewCell() }
             
-            
-            
             adCell.backgroundColorImageView.layer.cornerRadius = 10
             adCell.backgroundColorImageView.clipsToBounds = true
             adCell.backgroundColorImageView.backgroundColor = adColor.randomElement()

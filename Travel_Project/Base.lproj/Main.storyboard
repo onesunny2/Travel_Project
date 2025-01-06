@@ -379,6 +379,63 @@
             </objects>
             <point key="canvasLocation" x="1295.4198473282443" y="1504.9295774647887"/>
         </scene>
+        <!--인기도시-->
+        <scene sceneID="gEK-Ue-HpO">
+            <objects>
+                <tableViewController id="Lpn-m8-VSX" customClass="PopularNationTableViewController" customModule="Travel_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="Kss-7h-yW4">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="h8l-87-DF6">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="111"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIS-Lj-r8Z">
+                                    <rect key="frame" x="16" y="10" width="361" height="34"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                </textField>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ga2-OE-JWh">
+                                    <rect key="frame" x="16" y="64" width="361" height="32"/>
+                                    <segments>
+                                        <segment title="모두"/>
+                                        <segment title="국내"/>
+                                        <segment title="해외"/>
+                                    </segments>
+                                </segmentedControl>
+                            </subviews>
+                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <constraints>
+                                <constraint firstItem="ga2-OE-JWh" firstAttribute="top" secondItem="QIS-Lj-r8Z" secondAttribute="bottom" constant="20" id="HDm-6S-PGi"/>
+                                <constraint firstAttribute="bottom" secondItem="ga2-OE-JWh" secondAttribute="bottom" constant="16" id="OGp-gb-hBJ"/>
+                                <constraint firstItem="ga2-OE-JWh" firstAttribute="leading" secondItem="h8l-87-DF6" secondAttribute="leading" constant="16" id="amc-8o-2xq"/>
+                                <constraint firstItem="QIS-Lj-r8Z" firstAttribute="leading" secondItem="h8l-87-DF6" secondAttribute="leading" constant="16" id="oOV-Mh-1tm"/>
+                                <constraint firstAttribute="trailing" secondItem="QIS-Lj-r8Z" secondAttribute="trailing" constant="16" id="qXc-Be-0Ud"/>
+                                <constraint firstAttribute="trailing" secondItem="ga2-OE-JWh" secondAttribute="trailing" constant="16" id="vcV-aJ-mSF"/>
+                            </constraints>
+                        </view>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="DrE-09-o3y">
+                                <rect key="frame" x="0.0" y="161" width="393" height="44.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DrE-09-o3y" id="Ss3-60-p5K">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Lpn-m8-VSX" id="eCz-uP-fH2"/>
+                            <outlet property="delegate" destination="Lpn-m8-VSX" id="zxW-Ll-Rg5"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="인기도시" id="Htk-NO-CXZ"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Khg-bs-vhz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1293.8931297709923" y="2302.816901408451"/>
+        </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xFP-yg-WXd">
             <objects>
@@ -397,6 +454,7 @@
                         <segue destination="d9d-Kw-Bys" kind="relationship" relationship="viewControllers" id="PzA-rN-Dgt"/>
                         <segue destination="oYb-79-V13" kind="relationship" relationship="viewControllers" id="uf5-R6-qbb"/>
                         <segue destination="ufV-IF-tH2" kind="relationship" relationship="viewControllers" id="zrT-Bf-5Th"/>
+                        <segue destination="QKx-M8-RAT" kind="relationship" relationship="viewControllers" id="RDT-eS-HbP"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1fn-EM-qSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -514,6 +572,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CXv-pm-ux1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="368.70229007633588" y="1504.9295774647887"/>
+        </scene>
+        <!--Item-->
+        <scene sceneID="TXD-OP-eJZ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QKx-M8-RAT" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="9Yk-5b-T5X"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ls0-eG-rub">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Lpn-m8-VSX" kind="relationship" relationship="rootViewController" id="PqM-6a-WaC"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="DQD-jf-tV5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="370" y="2303"/>
         </scene>
     </scenes>
     <resources>
