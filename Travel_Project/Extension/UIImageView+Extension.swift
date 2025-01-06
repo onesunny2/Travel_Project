@@ -31,10 +31,12 @@ extension UIImageView {
     }
     
     // 일반 배경 처리
-    func commonUI(corner: CGFloat = 10, mask: Bool = true) {
+    func commonUI(corner: CGFloat = 10, mask: Bool = true, color: UIColor = .systemGray6, opacity: Float = 1, contentMode: UIView.ContentMode = .scaleAspectFit) {
         
         self.layer.cornerRadius = corner
         self.layer.masksToBounds = mask
-        self.backgroundColor = .systemGray6
+        self.backgroundColor = color
+        self.layer.opacity = opacity
+        self.contentMode = contentMode
     }
 }

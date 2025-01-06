@@ -431,6 +431,10 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="인기도시" id="Htk-NO-CXZ"/>
+                    <connections>
+                        <outlet property="citySegmentedControl" destination="ga2-OE-JWh" id="VSg-UT-rvE"/>
+                        <outlet property="searchTextfield" destination="QIS-Lj-r8Z" id="uz2-Hm-9xA"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Khg-bs-vhz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -573,11 +577,19 @@
             </objects>
             <point key="canvasLocation" x="368.70229007633588" y="1504.9295774647887"/>
         </scene>
-        <!--Item-->
+        <!--인기 국가-->
         <scene sceneID="TXD-OP-eJZ">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QKx-M8-RAT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="9Yk-5b-T5X"/>
+                    <tabBarItem key="tabBarItem" title="인기 국가" id="9Yk-5b-T5X">
+                        <imageReference key="image" image="flag.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                            <hierarchicalColors>
+                                <color red="0.31372550129999999" green="0.40784314269999999" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <color systemColor="secondaryLabelColor"/>
+                                <color systemColor="tertiaryLabelColor"/>
+                            </hierarchicalColors>
+                        </imageReference>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ls0-eG-rub">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -596,6 +608,7 @@
     <resources>
         <image name="basket.fill" catalog="system" width="128" height="108"/>
         <image name="book.pages.fill" catalog="system" width="107" height="128"/>
+        <image name="flag.circle.fill" catalog="system" width="128" height="123"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
