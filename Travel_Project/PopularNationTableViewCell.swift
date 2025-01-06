@@ -38,4 +38,14 @@ class PopularNationTableViewCell: UITableViewCell {
         cityBackgroundImageView.commonUI(color: .clear, contentMode: .scaleAspectFill)
         cityBackgroundImageView.kf.setImage(with: URL(string: url))
     }
+    
+    // 셀 재사용
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        // 비울 데이터들
+        cityBackgroundImageView.image = nil
+        cityLabel.text = ""
+        detailLabel.text = ""
+    }
 }
