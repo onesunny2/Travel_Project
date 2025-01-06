@@ -15,9 +15,19 @@ class ShoppingTableViewController: UITableViewController {
     @IBOutlet var addButton: UIButton!
     @IBOutlet var shoppingTextfield: UITextField!
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        print(#function)
+        // 여기서 실행했을 땐 nil값 추출이 원인으로 오류가 난다 -> 아직 객체들이 nil로써 명확히 관계성이 구분짓지 않은 단계인가,,? 그럼 여기선 무슨 작업을 해줘야할지
+            // 검색도 해보고 찾아봤지만 아직 감이 팍 오진 않는 것 같음
+//        textfieldBgImageView.commonUI()
+//        shoppingTextfield.commonUI()
+//        textButtonUI()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        print(#function)
         textfieldBgImageView.commonUI()
         shoppingTextfield.commonUI()
         textButtonUI()
