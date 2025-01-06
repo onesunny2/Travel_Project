@@ -14,5 +14,8 @@ class ShoppingTableViewCell: UITableViewCell {
     @IBOutlet var itemLabel: UILabel!
     @IBOutlet var backgroundImageView: UIImageView!
     
-
+    func configData(_ shopping: Shopping) {
+        backgroundImageView.commonUI()
+        itemLabel.commonUI(shopping.keyword, line: 1, textAlignment: .left, textColor: .label, size: 13, weight: .regular)
+    }
 }
