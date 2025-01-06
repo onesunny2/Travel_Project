@@ -40,6 +40,18 @@ class DetailInfoTableViewController: UITableViewController {
         tableView.reloadRows(at: [IndexPath(row: sender.tag, section: 0)], with: .none)
     }
     
+    // 저장 숫자 3자리 콤마찍히도록 하는 함수
+    func numberComma(_ number: Int) -> String {
+        
+        let num = number
+        let numberformatter = NumberFormatter()
+        numberformatter.numberStyle = .decimal
+        
+        guard let resultNum = numberformatter.string(from: NSNumber(integerLiteral: num)) else { return "" } // numberFormatter는 NSNumber라는 타입을 받아서 변환해 넣어줘야 함
+        
+        return resultNum
+    }
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return travelInfos.travel.count
     }
@@ -106,7 +118,8 @@ class DetailInfoTableViewController: UITableViewController {
             }
             
             if let save = row.save {
-                let formatted = save.formatted()
+//                let formatted = save.formatted()
+                let formatted = numberComma(save)  // numberFormatter 사용해본 방법
                 infoCell.saveLabel.commonUI("• 저장 \(formatted)", line: 1, textColor: .systemGray2, size: 12)
             }
             
