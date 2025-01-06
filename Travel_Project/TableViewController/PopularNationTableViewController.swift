@@ -14,6 +14,7 @@ class PopularNationTableViewController: UITableViewController {
     
     let segmentTitle = ["모두", "국내", "해외"]
     let cityInfo = CityInfo()
+    var city: [City] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,10 +30,39 @@ class PopularNationTableViewController: UITableViewController {
         
         citySegmentedControl.selectedSegmentIndex = 0
         
+        city = cityInfo.city
     }
     
-    @IBAction func searchTextfield(_ sender: UITextField) {
+    @IBAction func exitTextfield(_ sender: UITextField) {
         
+        guard let keyword = sender.text else { return }
+        
+        // 공백 상태로 엔터치면 원래 리스트 나오도록 구현
+        if sender.text?.count == 0 {
+            
+            let index = citySegmentedControl.selectedSegmentIndex
+            
+            // segmentcontrol 인덱스 값이 바뀔 때마다 데이터 reload
+            switch index {
+            case 0:
+                city = cityInfo.city
+                tableView.reloadData()
+            case 1:
+                city = cityInfo.city.filter { $0.domestic_travel == true }
+                tableView.reloadData()
+            case 2:
+                city = cityInfo.city.filter { $0.domestic_travel == false }
+                tableView.reloadData()
+            default:
+                break
+            }
+            
+        } else {
+            
+            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
+            
+            tableView.reloadData()
+        }
     }
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
@@ -42,10 +72,13 @@ class PopularNationTableViewController: UITableViewController {
         // segmentcontrol 인덱스 값이 바뀔 때마다 데이터 reload
         switch index {
         case 0:
+            city = cityInfo.city
             tableView.reloadData()
         case 1:
+            city = cityInfo.city.filter { $0.domestic_travel == true }
             tableView.reloadData()
         case 2:
+            city = cityInfo.city.filter { $0.domestic_travel == false }
             tableView.reloadData()
         default:
             break
@@ -56,52 +89,57 @@ class PopularNationTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        let index = citySegmentedControl.selectedSegmentIndex
+//        let index = citySegmentedControl.selectedSegmentIndex
         
-        switch index {
-        case 0:
-            return cityInfo.city.count
-        case 1:
-            return cityInfo.city.filter { $0.domestic_travel == true }.count
-        case 2:
-            return cityInfo.city.filter { $0.domestic_travel == false }.count
-        default:
-            return 0
-        }
+//        switch index {
+//        case 0:
+//            return cityInfo.city.count
+//        case 1:
+//            return cityInfo.city.filter { $0.domestic_travel == true }.count
+//        case 2:
+//            return cityInfo.city.filter { $0.domestic_travel == false }.count
+//        default:
+//            return 0
+//        }
+        return city.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        let segIndex = citySegmentedControl.selectedSegmentIndex
+//        let segIndex = citySegmentedControl.selectedSegmentIndex
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: PopularNationTableViewCell.identifier, for: indexPath) as? PopularNationTableViewCell else { return UITableViewCell() }
         
-        switch segIndex {
+       /* switch segIndex {
         case 0:
-            let row = cityInfo.city[indexPath.row]
-            cell.configData(row)
+//            row = cityInfo.city
+//            let row = cityInfo.city[indexPath.row]
+            cell.configData(row[indexPath.row])
             
             return cell
         case 1:
             // 처음에 오류났던 이유 => 트루값을 필터링해준게 아니라 그냥 true 이면 전체 셀 중의 indexPath.row 중 참 인 경우만 걸러내서 중간중간
             // 빈 곳이 생겼던 것 (false도 마찬가지)
-            let korea = cityInfo.city.filter { $0.domestic_travel == true }
-            let koreaRow = korea[indexPath.row]
+//            row = cityInfo.city.filter { $0.domestic_travel == true }
+            let koreaRow = row[indexPath.row]
             
             cell.configData(koreaRow)
             
             return cell
         case 2:
-            let foreign = cityInfo.city.filter { $0.domestic_travel == false }
-            let foreignRow = foreign[indexPath.row]
+//            row = cityInfo.city.filter { $0.domestic_travel == false }
+            let foreignRow = row[indexPath.row]
             
             cell.configData(foreignRow)
             
             return cell
         default:
             return UITableViewCell()
-        }
+        } */
+        let row = city[indexPath.row]
+        cell.configData(row)
+        
+        return cell
 
     }
     

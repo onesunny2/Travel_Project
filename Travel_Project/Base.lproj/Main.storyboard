@@ -396,7 +396,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
-                                        <action selector="searchTextfield:" destination="Lpn-m8-VSX" eventType="editingDidEndOnExit" id="eir-SW-PxF"/>
+                                        <action selector="exitTextfield:" destination="Lpn-m8-VSX" eventType="editingDidEndOnExit" id="eir-SW-PxF"/>
                                     </connections>
                                 </textField>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ga2-OE-JWh">
