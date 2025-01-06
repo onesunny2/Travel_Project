@@ -19,10 +19,13 @@ class ShoppingTableViewController: UITableViewController {
         super.awakeFromNib()
         print(#function)
         // 여기서 실행했을 땐 nil값 추출이 원인으로 오류가 난다 -> 아직 객체들이 nil로써 명확히 관계성이 구분짓지 않은 단계인가,,? 그럼 여기선 무슨 작업을 해줘야할지
-            // 검색도 해보고 찾아봤지만 아직 감이 팍 오진 않는 것 같음
+            // 검색도 해보고 찾아봤지만 아직 감이 팍 오진 않는 것 같음 -> 조금 더 찾아보니 컨트롤러와 나머지 객체들의 초기화 시점이 다르고 더 상위 존재인 컨트롤러가 먼저 초기화 되는 듯
+            // 그래서 tableView는 초기화 되었지만, 셀과 서브뷰 같은 존재들의 초기화 설정을 하기에는 nil의 상태로 남아있어서 viewDidLoad에 보통 객체들의 설정을 하고
+            // 여기서는 tableView와 같은 뷰 계층 구조에 영향을 안받는 큰 틀의 설정은 가능한 것 같다
 //        textfieldBgImageView.commonUI()
 //        shoppingTextfield.commonUI()
 //        textButtonUI()
+        view.backgroundColor = .systemBackground   // >> 실제로 뷰의 설정은 오류 없이 작동함
     }
     
     override func viewDidLoad() {
