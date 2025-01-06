@@ -388,11 +388,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="h8l-87-DF6">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="111"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="187"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIS-Lj-r8Z">
-                                    <rect key="frame" x="16" y="10" width="361" height="34"/>
+                                    <rect key="frame" x="16" y="86" width="361" height="34"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -400,7 +400,7 @@
                                     </connections>
                                 </textField>
                                 <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="ga2-OE-JWh">
-                                    <rect key="frame" x="16" y="64" width="361" height="32"/>
+                                    <rect key="frame" x="16" y="140" width="361" height="32"/>
                                     <segments>
                                         <segment title="모두"/>
                                         <segment title="국내"/>
@@ -410,11 +410,21 @@
                                         <action selector="segmentValueChanged:" destination="Lpn-m8-VSX" eventType="valueChanged" id="5m4-UC-tGF"/>
                                     </connections>
                                 </segmentedControl>
+                                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="LXr-dC-JT5">
+                                    <rect key="frame" x="16" y="12" width="361" height="56"/>
+                                    <textInputTraits key="textInputTraits"/>
+                                    <connections>
+                                        <outlet property="delegate" destination="Lpn-m8-VSX" id="BbS-ym-0mx"/>
+                                    </connections>
+                                </searchBar>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
+                                <constraint firstItem="LXr-dC-JT5" firstAttribute="leading" secondItem="h8l-87-DF6" secondAttribute="leading" constant="16" id="0vc-bT-pVw"/>
+                                <constraint firstAttribute="trailing" secondItem="LXr-dC-JT5" secondAttribute="trailing" constant="16" id="26z-d8-n90"/>
                                 <constraint firstItem="ga2-OE-JWh" firstAttribute="top" secondItem="QIS-Lj-r8Z" secondAttribute="bottom" constant="20" id="HDm-6S-PGi"/>
                                 <constraint firstAttribute="bottom" secondItem="ga2-OE-JWh" secondAttribute="bottom" constant="16" id="OGp-gb-hBJ"/>
+                                <constraint firstItem="LXr-dC-JT5" firstAttribute="top" secondItem="h8l-87-DF6" secondAttribute="top" constant="12" id="S0T-hv-sE9"/>
                                 <constraint firstItem="ga2-OE-JWh" firstAttribute="leading" secondItem="h8l-87-DF6" secondAttribute="leading" constant="16" id="amc-8o-2xq"/>
                                 <constraint firstItem="QIS-Lj-r8Z" firstAttribute="leading" secondItem="h8l-87-DF6" secondAttribute="leading" constant="16" id="oOV-Mh-1tm"/>
                                 <constraint firstAttribute="trailing" secondItem="QIS-Lj-r8Z" secondAttribute="trailing" constant="16" id="qXc-Be-0Ud"/>
@@ -423,7 +433,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" id="DrE-09-o3y">
-                                <rect key="frame" x="0.0" y="161" width="393" height="44.666667938232422"/>
+                                <rect key="frame" x="0.0" y="237" width="393" height="44.666667938232422"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DrE-09-o3y" id="Ss3-60-p5K">
                                     <rect key="frame" x="0.0" y="0.0" width="393" height="44.666667938232422"/>
@@ -439,6 +449,7 @@
                     <navigationItem key="navigationItem" title="인기도시" id="Htk-NO-CXZ"/>
                     <connections>
                         <outlet property="citySegmentedControl" destination="ga2-OE-JWh" id="VSg-UT-rvE"/>
+                        <outlet property="searchBar" destination="LXr-dC-JT5" id="2Ks-rz-UqJ"/>
                         <outlet property="searchTextfield" destination="QIS-Lj-r8Z" id="uz2-Hm-9xA"/>
                     </connections>
                 </tableViewController>

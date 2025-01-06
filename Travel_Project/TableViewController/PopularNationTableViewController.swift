@@ -7,14 +7,29 @@
 
 import UIKit
 
-class PopularNationTableViewController: UITableViewController {
+/*
+ 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다...
+ */
+
+class PopularNationTableViewController: UITableViewController, UISearchResultsUpdating {
     
     @IBOutlet var searchTextfield: UITextField!
     @IBOutlet var citySegmentedControl: UISegmentedControl!
+    @IBOutlet var searchBar: UISearchBar!
+    
+    private let searchController = UISearchController()
     
     let segmentTitle = ["모두", "국내", "해외"]
     let cityInfo = CityInfo()
     var city: [City] = []
+    
+    var isFilterting: Bool {  // 실시간 검색을 하기 위해서는 서치 컨트롤러가 active 상태이고 text 값이 실제로 있는지 알려야 한다고 하는데 적용 안되는 것 같다
+        let searchController = self.searchController
+        let isActive = searchController.isActive
+        let isSearchBarHasText = searchController.searchBar.text?.isEmpty == false
+            
+            return isActive && isSearchBarHasText
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +45,16 @@ class PopularNationTableViewController: UITableViewController {
         
         citySegmentedControl.selectedSegmentIndex = 0
         
-        city = cityInfo.city
+        city = cityInfo.city  // 초기값 설정
+        
+        searchController.searchResultsUpdater = self
+    }
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        
+        guard let text = searchController.searchBar.text else { return }
+        self.city = cityInfo.city.filter { $0.city_name.contains(text) || $0.city_explain.contains(text) || $0.city_english_name.contains(text) }
+        self.tableView.reloadData()
     }
     
     @IBAction func exitTextfield(_ sender: UITextField) {
