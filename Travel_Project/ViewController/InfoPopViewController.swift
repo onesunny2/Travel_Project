@@ -38,10 +38,15 @@ class InfoPopViewController: UIViewController {
 
         navigationItem.title = "광고 화면"
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(dismissButtonTapped))
+        
+        guard let text = adComment else { return }
+        adLabel.commonUI(text, line: 0, textAlignment: .center, textColor: .label, size: 24, weight: .black)
     }
     
     @objc
     func dismissButtonTapped() {
         dismiss(animated: true)
     }
+    
+    
 }

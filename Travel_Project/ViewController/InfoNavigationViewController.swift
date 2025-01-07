@@ -26,8 +26,14 @@ class InfoNavigationViewController: UIViewController {
         
         let url = contents[0]
         posterImageView.kf.setImage(with: URL(string: url))
-        titleLabel.text = contents[1]
-        subtitleLabel.text = contents[2]
+        posterImageView.commonUI(corner: 15, mask: true, color: .clear, opacity: 1, contentMode: .scaleAspectFill)
+        titleLabel.commonUI(contents[1], line: 0, textAlignment: .center, textColor: .label, size: 30, weight: .black)
+        subtitleLabel.commonUI(contents[2], line: 0, textAlignment: .center, textColor: .label, size: 20, weight: .bold)
+        popButton.configuration = .filled()
+        popButton.configuration?.cornerStyle = .capsule
+        popButton.configuration?.baseForegroundColor = .white
+        popButton.configuration?.baseBackgroundColor = .systemIndigo
+        popButton.configuration?.attributedTitle = AttributedString("다른 관광지 보러가기", attributes: AttributeContainer().font(.systemFont(ofSize: 15, weight: .medium)))
     }
 
     @IBAction func popButtonTapped(_ sender: UIButton) {

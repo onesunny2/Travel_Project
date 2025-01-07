@@ -585,6 +585,10 @@
                                 <rect key="frame" x="28" y="127" width="337" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="editingTextfield:" destination="Khc-h3-0oN" eventType="editingChanged" id="8qO-mh-oRU"/>
+                                    <action selector="enterKeyboardTapped:" destination="Khc-h3-0oN" eventType="editingDidEndOnExit" id="SS5-Le-u2q"/>
+                                </connections>
                             </textField>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F0z-ly-iO6">
                                 <rect key="frame" x="28" y="173" width="337" height="32"/>

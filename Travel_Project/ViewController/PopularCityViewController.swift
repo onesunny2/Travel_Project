@@ -62,6 +62,40 @@ class PopularCityViewController: UIViewController, UICollectionViewDelegate, UIC
         searchTextfield.autocorrectionType = .no
     }
     
+    func searchResult(_ sender: UITextField) {
+        
+        let segIndex = citySegmentedControl.selectedSegmentIndex
+        
+        guard let keyword = sender.text else { return }
+        
+        let newKeyword = keyword.lowercased().components(separatedBy: [" "]).joined() // 대소문자와 공백 일괄처리
+        
+        if segIndex == 0 {
+            city = cityInfo.city.filter { $0.city_name.contains(newKeyword) || $0.city_explain.contains(newKeyword) || $0.city_english_name.lowercased().contains(newKeyword) }
+            collectionView.reloadData()
+        } else if segIndex == 1 {
+            city = cityInfo.city.filter { $0.domestic_travel == true && ($0.city_name.contains(newKeyword) || $0.city_explain.contains(newKeyword) || $0.city_english_name.lowercased().contains(newKeyword)) }
+            collectionView.reloadData()
+        } else if segIndex == 2 {
+            city = cityInfo.city.filter { $0.domestic_travel == false && ($0.city_name.contains(newKeyword) || $0.city_explain.contains(newKeyword) || $0.city_english_name.lowercased().contains(newKeyword)) }
+            collectionView.reloadData()
+        }
+    }
+    
+    @IBAction func enterKeyboardTapped(_ sender: UITextField) {
+        searchResult(sender)
+    }
+    
+    @IBAction func editingTextfield(_ sender: UITextField) {
+        searchResult(sender)
+        
+        // 검색하다가 지우면 전체 리스트 보이도록
+        if sender.text?.count == 0 {
+            segmentValueChanged(citySegmentedControl)
+        }
+    }
+    
+    
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
         let index = citySegmentedControl.selectedSegmentIndex
         
