@@ -8,8 +8,10 @@
 import UIKit
 
 /*
- 실시간 검색은... 열심히 서치해서 해보았지만... 실패했습니다... 관련 코드들와 스토리보드 UI는 눈 감고 지나쳐주시면 될 것 같아요ㅠㅠ
+ 서치바와 컨트롤러는... 열심히 서치해서 해보았지만... 실패했습니다... 관련 코드들와 스토리보드 UI는 눈 감고 지나쳐주시면 될 것 같아요ㅠㅠ
  */
+
+// 옵션 중 공백과 텍스트 색상은 추가로 시도해보기
 
 class PopularNationTableViewController: UITableViewController, UISearchResultsUpdating {
     
@@ -81,10 +83,9 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
         guard let keyword = sender.text else { return }
         
         if keyword.count == 0 {
-
             reloadOriginalData()
         } else {
-            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
+            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.lowercased().contains(keyword.lowercased()) || $0.city_explain.contains(keyword) }
             
             tableView.reloadData()
         }
@@ -99,7 +100,7 @@ class PopularNationTableViewController: UITableViewController, UISearchResultsUp
             reloadOriginalData()
         } else {
             
-            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.contains(keyword) || $0.city_explain.contains(keyword) }
+            city = cityInfo.city.filter { $0.city_name.contains(keyword) || $0.city_english_name.lowercased().contains(keyword.lowercased()) || $0.city_explain.contains(keyword) }
             
             tableView.reloadData()
         }

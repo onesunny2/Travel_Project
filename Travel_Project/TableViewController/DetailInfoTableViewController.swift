@@ -62,8 +62,32 @@ class DetailInfoTableViewController: UITableViewController {
 
         return height
     }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        let row = travelInfos.travel[indexPath.row]
+        let sb = UIStoryboard(name: "Main", bundle: nil)
+        
+        if row.ad {
+            let adVc = sb.instantiateViewController(withIdentifier: "InfoPopViewController")
+            adVc.modalPresentationStyle = .fullScreen
+            present(adVc, animated: true)
+            
+        } else {
+            let detailVc = sb.instantiateViewController(withIdentifier: "InfoNavigationViewController")
+            navigationController?.pushViewController(detailVc, animated: true)
+        }
+    }
 
 }
+
+
+/*
+    < 화면전환 >
+    1. 관광지셀로 선택해서 push: 어디있는 스토리보드인지, 어떤 뷰컨트롤러 가져올건지, navigationController.pushViewController,
+ 
+ 
+ */
 
 
 /*
