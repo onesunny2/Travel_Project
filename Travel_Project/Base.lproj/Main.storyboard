@@ -291,6 +291,9 @@
                                 <rect key="frame" x="159" y="518" width="75" height="35"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                <connections>
+                                    <action selector="popButtonTapped:" destination="g3J-ed-XaV" eventType="touchUpInside" id="7Du-Nj-hIK"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="5aM-Le-6fO"/>
@@ -309,6 +312,12 @@
                             <constraint firstItem="dEa-pC-qBu" firstAttribute="leading" secondItem="5aM-Le-6fO" secondAttribute="leading" constant="24" id="yiT-e9-4M4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="popButton" destination="0z2-Tk-ePf" id="dCz-98-q35"/>
+                        <outlet property="posterImageView" destination="dEa-pC-qBu" id="6DD-qt-Ggh"/>
+                        <outlet property="subtitleLabel" destination="T8M-f5-LAW" id="wpR-GT-wMW"/>
+                        <outlet property="titleLabel" destination="xKc-pD-aCi" id="gTV-cv-HZk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m9q-RT-Fzn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -337,6 +346,9 @@
                             <constraint firstItem="Wib-CL-C1Q" firstAttribute="leading" secondItem="TMt-e2-Ubg" secondAttribute="leading" constant="40" id="fIo-6G-F8Z"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="adLabel" destination="Wib-CL-C1Q" id="IaY-PI-IIS"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VQx-Ey-QwQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

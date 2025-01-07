@@ -14,7 +14,9 @@ class DetailInfoTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        navigationItem.backButtonTitle = ""
+        navigationController?.navigationBar.tintColor = .label
     }
     
     // 좋아요 버튼 눌렀을 때, true - false 값 서로 스위칭 되도록
@@ -69,13 +71,23 @@ class DetailInfoTableViewController: UITableViewController {
         let sb = UIStoryboard(name: "Main", bundle: nil)
         
         if row.ad {
-            let adVc = sb.instantiateViewController(withIdentifier: "InfoPopViewController")
-            adVc.modalPresentationStyle = .fullScreen
-            present(adVc, animated: true)
+            guard let adVc = sb.instantiateViewController(withIdentifier: InfoPopViewController.identifier) as? InfoPopViewController else { return }
+            adVc.adCommet = row.title  // adComment도 타입이 옵셔널이기 때문에 따로 바인딩하라는 오류가 안뜨는 것
+            
+            let navAd = UINavigationController(rootViewController: adVc)
+            navAd.navigationBar.tintColor = .label
+            navAd.modalPresentationStyle = .fullScreen
+            present(navAd, animated: true)
             
         } else {
-            let detailVc = sb.instantiateViewController(withIdentifier: "InfoNavigationViewController")
-            navigationController?.pushViewController(detailVc, animated: true)
+            guard let detailVc = sb.instantiateViewController(withIdentifier: InfoNavigationViewController.identifier) as? InfoNavigationViewController else { return }
+            guard let image = row.travel_image, let title = row.title, let subtitle = row.description else { return }
+            detailVc.contents[0] = image
+            detailVc.contents[1] = title
+            detailVc.contents[2] = subtitle
+            
+            self.navigationController?.pushViewController(detailVc, animated: true)
+            
         }
     }
 
