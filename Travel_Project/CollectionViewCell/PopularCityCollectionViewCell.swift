@@ -9,9 +9,24 @@ import UIKit
 
 class PopularCityCollectionViewCell: UICollectionViewCell {
 
+    @IBOutlet var cityImageView: UIImageView!
+    @IBOutlet var cityLabel: UILabel!
+    @IBOutlet var explainLabel: UILabel!
+    
+    static let identifier = "PopularCityCollectionViewCell"
+    
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        cityImageView.image = nil
+        cityLabel.text = ""
+        explainLabel.text = ""
     }
 
 }
