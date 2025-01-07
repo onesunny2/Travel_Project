@@ -17,12 +17,7 @@ class InfoNavigationViewController: UIViewController {
     
     static let identifier = "InfoNavigationViewController"
     
-    var contents = [String](repeating: "", count: 3) {
-        didSet {
-            titleLabel.text = contents[1]
-            subtitleLabel.text = contents[2]
-        }
-    }
+    var contents = [String](repeating: "", count: 3) 
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +26,8 @@ class InfoNavigationViewController: UIViewController {
         
         let url = contents[0]
         posterImageView.kf.setImage(with: URL(string: url))
-//        titleLabel.text = contents[1]
-//        subtitleLabel.text = contents[2]
+        titleLabel.text = contents[1]
+        subtitleLabel.text = contents[2]
     }
 
     @IBAction func popButtonTapped(_ sender: UIButton) {

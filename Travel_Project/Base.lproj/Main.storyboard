@@ -6,6 +6,7 @@
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -550,7 +551,65 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Khg-bs-vhz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1293.8931297709923" y="2302.816901408451"/>
+            <point key="canvasLocation" x="2831" y="2315"/>
+        </scene>
+        <!--인기 도시-->
+        <scene sceneID="bm1-h6-Lyu">
+            <objects>
+                <viewController storyboardIdentifier="PopularCityViewController" id="Khc-h3-0oN" customClass="PopularCityViewController" customModule="Travel_Project" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="r80-6A-e0Z">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="F0z-ly-iO6">
+                                <rect key="frame" x="28" y="123" width="337" height="32"/>
+                                <segments>
+                                    <segment title="First"/>
+                                    <segment title="Second"/>
+                                </segments>
+                            </segmentedControl>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="oWT-QT-XP1">
+                                <rect key="frame" x="28" y="182" width="337" height="587"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ceb-X7-ruc">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="lpW-YE-EBo">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="WGp-vT-hSu">
+                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1Hc-Mh-YVZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oWT-QT-XP1" firstAttribute="leading" secondItem="1Hc-Mh-YVZ" secondAttribute="leading" constant="28" id="NPl-NY-iNH"/>
+                            <constraint firstItem="oWT-QT-XP1" firstAttribute="top" secondItem="F0z-ly-iO6" secondAttribute="bottom" constant="28" id="TsC-HE-HxU"/>
+                            <constraint firstItem="1Hc-Mh-YVZ" firstAttribute="trailing" secondItem="oWT-QT-XP1" secondAttribute="trailing" constant="28" id="e4d-4W-KTC"/>
+                            <constraint firstItem="F0z-ly-iO6" firstAttribute="leading" secondItem="1Hc-Mh-YVZ" secondAttribute="leading" constant="28" id="fW1-xf-iKI"/>
+                            <constraint firstItem="1Hc-Mh-YVZ" firstAttribute="bottom" secondItem="oWT-QT-XP1" secondAttribute="bottom" id="lEe-XL-V4p"/>
+                            <constraint firstItem="1Hc-Mh-YVZ" firstAttribute="trailing" secondItem="F0z-ly-iO6" secondAttribute="trailing" constant="28" id="mH0-Eg-4gL"/>
+                            <constraint firstItem="F0z-ly-iO6" firstAttribute="top" secondItem="1Hc-Mh-YVZ" secondAttribute="top" constant="20" id="xoJ-7x-hay"/>
+                            <constraint firstItem="1Hc-Mh-YVZ" firstAttribute="bottom" secondItem="oWT-QT-XP1" secondAttribute="bottom" id="zln-Y5-H18"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="인기 도시" id="Jdt-s6-Ew6"/>
+                    <connections>
+                        <outlet property="citySegmentedControl" destination="F0z-ly-iO6" id="4Er-yz-yE4"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kLt-yZ-BXn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1295" y="2303"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="xFP-yg-WXd">
@@ -570,7 +629,7 @@
                         <segue destination="d9d-Kw-Bys" kind="relationship" relationship="viewControllers" id="PzA-rN-Dgt"/>
                         <segue destination="oYb-79-V13" kind="relationship" relationship="viewControllers" id="uf5-R6-qbb"/>
                         <segue destination="ufV-IF-tH2" kind="relationship" relationship="viewControllers" id="zrT-Bf-5Th"/>
-                        <segue destination="QKx-M8-RAT" kind="relationship" relationship="viewControllers" id="RDT-eS-HbP"/>
+                        <segue destination="e8I-TQ-1q7" kind="relationship" relationship="viewControllers" id="beI-Mb-ISm"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1fn-EM-qSF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -689,12 +748,12 @@
             </objects>
             <point key="canvasLocation" x="368.70229007633588" y="1504.9295774647887"/>
         </scene>
-        <!--인기 국가-->
-        <scene sceneID="TXD-OP-eJZ">
+        <!--인기 도시-->
+        <scene sceneID="kwC-Xf-0nO">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="QKx-M8-RAT" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="인기 국가" id="9Yk-5b-T5X">
-                        <imageReference key="image" image="flag.circle.fill" catalog="system" renderingMode="hierarchical-single">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="e8I-TQ-1q7" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="인기 도시" id="jXA-cz-jGn">
+                        <imageReference key="image" image="flag.fill" catalog="system" symbolScale="large" renderingMode="hierarchical-single">
                             <hierarchicalColors>
                                 <color red="0.31372550129999999" green="0.40784314269999999" blue="0.86274516580000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <color systemColor="secondaryLabelColor"/>
@@ -703,24 +762,27 @@
                         </imageReference>
                     </tabBarItem>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ls0-eG-rub">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="8e4-oK-mol">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <navigationBarAppearance key="standardAppearance">
+                            <textAttributes key="titleTextAttributes"/>
+                        </navigationBarAppearance>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="Lpn-m8-VSX" kind="relationship" relationship="rootViewController" id="PqM-6a-WaC"/>
+                        <segue destination="Khc-h3-0oN" kind="relationship" relationship="rootViewController" id="T0z-97-bzu"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="DQD-jf-tV5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J4o-Aw-qgf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="370" y="2303"/>
+            <point key="canvasLocation" x="369" y="2303"/>
         </scene>
     </scenes>
     <resources>
         <image name="basket.fill" catalog="system" width="128" height="108"/>
         <image name="book.pages.fill" catalog="system" width="107" height="128"/>
-        <image name="flag.circle.fill" catalog="system" width="128" height="123"/>
+        <image name="flag.fill" catalog="system" width="128" height="121"/>
         <image name="info.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="secondaryLabelColor">
             <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
