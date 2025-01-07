@@ -72,7 +72,7 @@ class DetailInfoTableViewController: UITableViewController {
         
         if row.ad {
             guard let adVc = sb.instantiateViewController(withIdentifier: InfoPopViewController.identifier) as? InfoPopViewController else { return }
-            adVc.adCommet = row.title  // adComment도 타입이 옵셔널이기 때문에 따로 바인딩하라는 오류가 안뜨는 것
+            adVc.adComment = row.title  // adComment도 타입이 옵셔널이기 때문에 따로 바인딩하라는 오류가 안뜨는 것
             
             let navAd = UINavigationController(rootViewController: adVc)
             navAd.navigationBar.tintColor = .label
