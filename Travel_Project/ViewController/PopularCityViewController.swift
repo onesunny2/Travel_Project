@@ -10,7 +10,7 @@ import UIKit
 class PopularCityViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
     @IBOutlet var citySegmentedControl: UISegmentedControl!
-    
+    @IBOutlet var searchTextfield: UITextField!
     @IBOutlet var collectionView: UICollectionView!
     
     let cityInfo = CityInfo()
@@ -33,6 +33,8 @@ class PopularCityViewController: UIViewController, UICollectionViewDelegate, UIC
         
         city = cityInfo.city
         
+        textfieldUI()
+        
         let layout = UICollectionViewFlowLayout()
         let itemSpacing: CGFloat = 28
         let sectionSpacing: CGFloat = 28
@@ -50,6 +52,14 @@ class PopularCityViewController: UIViewController, UICollectionViewDelegate, UIC
         layout.minimumLineSpacing = itemSpacing
         
         collectionView.collectionViewLayout = layout
+    }
+    
+    func textfieldUI() {
+        searchTextfield.placeholder = "가고싶은 도시를 검색해보세요!"
+        searchTextfield.borderStyle = .roundedRect
+        searchTextfield.keyboardType = .default
+        searchTextfield.clearButtonMode = .whileEditing
+        searchTextfield.autocorrectionType = .no
     }
     
     @IBAction func segmentValueChanged(_ sender: UISegmentedControl) {
@@ -85,10 +95,19 @@ class PopularCityViewController: UIViewController, UICollectionViewDelegate, UIC
         
         let row = city[indexPath.row]
         
-        cell.cityImageView.useKf2(url: row.city_image, 30)
+        guard let url = row.city_image else { return UICollectionViewCell() }
+        
+        cell.cityImageView.kf.setImage(with: URL(string: url))
+        cell.cityImageView.contentMode = .scaleAspectFill
+        cell.cityImageView.layer.cornerRadius = cell.cityImageView.frame.size.width/2
+        cell.cityImageView.layer.borderWidth = 1
+        cell.cityImageView.layer.borderColor = UIColor.clear.cgColor
+        cell.cityImageView.clipsToBounds = true
         
         let title = "\(row.city_name) | \(row.city_english_name)"
         cell.cityLabel.commonUI(title, line: 1, textAlignment: .center, textColor: .label, size: 17, weight: .bold)
+        
+        cell.explainLabel.commonUI(row.city_explain, line: 0, textAlignment: .center, size: 14, weight: .medium)
         
         return cell
         

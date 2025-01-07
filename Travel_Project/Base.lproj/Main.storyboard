@@ -617,6 +617,7 @@
                     <connections>
                         <outlet property="citySegmentedControl" destination="F0z-ly-iO6" id="4Er-yz-yE4"/>
                         <outlet property="collectionView" destination="oWT-QT-XP1" id="EIx-xg-L9e"/>
+                        <outlet property="searchTextfield" destination="rVU-E8-kUx" id="Cnr-ze-gAr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kLt-yZ-BXn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
